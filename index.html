@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Western Link</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#020617',
+                            light: '#f8fafc',
+                            primary: '#2563eb',
+                            secondary: '#3b82f6',
+                            accent: '#60a5fa',
+                        },
+                    },
+                    backgroundImage: {
+                        // 'hero-gradient': 'radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.35) 0%, rgba(10, 9, 12, 0) 50%), radial-gradient(circle at 85% 80%, rgba(45, 212, 191, 0.25) 0%, rgba(10, 9, 12, 0) 50%)',
+                        'hero-gradient': 'radial-gradient(circle at 15% 20%,rgba(59, 130, 246, 0.35) 0%, rgba(10, 9, 12, 0) 50%),radial-gradient(circle at 85% 80%, rgba(37, 99, 235, 0.25) 0%,rgba(10, 9, 12, 0) 50%);',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',
+                        'glow': '0 0 20px rgba(124, 58, 237, 0.5)',
+                    },
+                },
+            },
+        }
+    </script>
+
+    <!-- CSS Styling  -->
+
+    <style>
+        /* Sets the main background color */
+        body {
+            background-color: #0A090C;
+        }
+
+        /* 2. GRID PATTERN: Creates the subtle line pattern in the background */
+        .bg-grid {
+            background-image: linear-gradient(rgba(255, 255, 255, 0) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            /* Size of the grid squares */
+        }
+
+        #circle {
+            scale: 0;
+            opacity: 0;
+        }
+
+        #nav-links a::after {
+            content: "";
+            width: 100%;
+            height: 2px;
+            border-radius: 20px;
+            position: absolute;
+            left: 0;
+            bottom: 3px;
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: transform .2s linear;
+        }
+
+        #nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        #nav-links a.active::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* 3. LOGOS MARQUEE: Animation for scrolling logos endlessly */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+            /* Runs for 30s linearly */
+        }
+
+        /* Pauses the animation when user hovers over it */
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        /* 4. BIG TEXT SCROLL: Slower animation for the big "Strategy" text */
+        @keyframes scroll-text {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-marquee-text {
+            display: flex;
+            width: max-content;
+            animation: scroll-text 40s linear infinite;
+            /* Slower speed (40s) */
+        }
+
+        /* 5. SPINNING STAR: Rotates elements (like asterisks) 360 degrees */
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slow {
+            animation: spin 8s linear infinite;
+        }
+
+        /* 6. FLOATING EFFECT: Makes the Footer Card float up and down */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            /* Moves up slightly */
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* 7. GLASS SHINE: Adds a moving shine effect over glass cards */
+        @keyframes shine {
+            0% {
+                left: -100%;
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                left: 100%;
+                opacity: 0;
+            }
+        }
+
+        .glass-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-shine::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: skewX(-25deg);
+            animation: shine 8s infinite;
+            pointer-events: none;
+        }
+
+        /* 8. FAQ REVEAL ANIMATION: Smoothly opens the FAQ answer */
+        details[open] .faq-content {
+            animation: softReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes softReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(-15px) scale(0.98);
+                filter: blur(10px);
+                /* Starts blurry */
+                max-height: 0;
+            }
+
+            50% {
+                max-height: 500px;
+                /* Expands height */
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+                /* Ends clear */
+                max-height: 500px;
+            }
+        }
+    </style>
+
+</head>
+
+<body
+    class="text-brand-light font-sans antialiased selection:bg-brand-accent selection:text-brand-primary overflow-x-hidden">
+    <div id="circle"
+        class="hidden sm:flex fixed bg-brand-accent backdrop-blur-md w-10 h-10 rounded-full border border-white/10 z-50">
+    </div>
+    <!-- Header & Navbar  -->
+    <header class="fixed w-full z-40 py-6 px-4 md:px-8 ">
+
+        <nav class="max-w-7xl mx-auto flex items-center justify-between">
+
+            <div
+                class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-8 py-3 shadow-glass hover:bg-white/10 transition-all cursor-pointer">
+                <a href="#" class="text-md font-bold tracking-tight text-white">Western <span
+                        class="text-brand-accent">Link</span></a>
+            </div>
+
+            <div id="nav-links"
+                class="hidden md:flex bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-10 py-2 shadow-glass mx-4">
+                <div class="flex items-center space-x-10 text-sm font-medium text-gray-300">
+                    <a href="#"
+                        class="relative active py-2 px-1 text-brand-accent after:bg-brand-accent transition-all">Home</a>
+                    <a href="#"
+                        class="relative py-2 px-1 after:bg-brand-accent hover:text-brand-accent hover:-translate-y-1 transition-all">Services</a>
+                    <a href="#"
+                        class="relative py-2 px-1 after:bg-brand-accent hover:text-brand-accent hover:-translate-y-1 transition-all">Our
+                        Work</a>
+                    <a href="#"
+                        class="relative py-2 px-1 after:bg-brand-accent hover:text-brand-accent hover:-translate-y-1 transition-all">Reviews</a>
+                    <a href="#"
+                        class="relative py-2 px-1 after:bg-brand-accent hover:text-brand-accent hover:-translate-y-1 transition-all">Contact
+                        us</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="#"
+                    class="group hidden sm:flex items-center space-x-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 text-xs font-medium transition-all text-gray-300 shadow-glass hover:bg-white/10 hover:border-white/20">
+                    <span
+                        class="flex items-center justify-center text-gray-300 group-hover:text-green-400 transition-all shadow-glass group">
+                        <i class="fab fa-whatsapp text-2xl group-hover:scale-110 transition-transform"></i>
+                    </span>
+                    <span class="text-gray-600 px-1 group-hover:text-white">•</span>
+                    <span class="text-gray-400 group-hover:text-white">its free</span>
+                    <i class="fas fa-arrow-right ml-2 text-white text-[10px] opacity-70 group-hover:opacity-100"></i>
+                </a>
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <div class="relative min-h-screen w-full flex flex-col bg-hero-gradient">
+
+        <div class="absolute inset-0 bg-grid pointer-events-none z-0"></div>
+        <div class="fixed top-20 left-[-50px] w-64 h-64 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none">
+        </div>
+        <div
+            class="fixed bottom-20 right-[-50px] w-80 h-80 bg-teal-500/10 rounded-full blur-[100px] pointer-events-none">
+        </div>
+
+        <!-- Hero Section  -->
+        <section
+            class="flex-grow flex flex-col items-center justify-center text-center px-4 relative z-10 w-full max-w-5xl mx-auto mt-[7.1rem] mb-12">
+
+            <div
+                class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-8 backdrop-blur-md">
+                <span class="text-brand-accent text-xs"><i class="fa-solid fa-certificate"></i></span>
+                <span class="text-xs text-gray-300 font-medium">Wordpress Solution in 1 Place</span>
+            </div>
+
+            <h1 class="text-3xl md:text-6xl lg:text-5xl font-bold leading-tight mb-6 text-white drop-shadow-2xl">
+                WordPress Excellence for Your Business<br>
+                <span class="block mt-1 relative inline-block">– Custom Solutions, Faster Results!
+                    <span class="absolute -right-12 top-2 hidden md:block animate-pulse">
+                        <svg width="40" height="40" viewBox="0 0 50 50" fill="none" stroke="#a78bfa" stroke-width="4"
+                            stroke-linecap="round">
+                            <path d="M5 40C15 40 15 10 25 10C35 10 35 30 45 5" />
+                        </svg>
+                    </span>
+                </span>
+            </h1>
+
+            <p class="max-w-2xl  text-sm text-base md:text-lg text-gray-400 mb-10 leading-relaxed font-light">
+                We build secure, SEO-friendly, and high-performing WordPress websites tailored to your goals.
+            </p>
+
+            <div class="flex flex-row items-center justify-center gap-2 sm:gap-5 w-full">
+
+                <a href="#"
+                    class="group flex items-center justify-center space-x-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-8 py-3 text-white transition-all w-full sm:w-auto min-w-[170px] backdrop-blur-sm">
+                    <i class="fa-solid fa-headset text-xl text-white group-hover:scale-110 transition-transform"></i>
+                    <span class=" text-sm sm:text-md font-medium">Free Consultation</span>
+                </a>
+
+                <a href="#"
+                    class="flex items-center justify-center space-x-2 bg-gradient-to-r from-[#7c3aed] to-[#3b82f6] hover:brightness-110 text-white rounded-full px-8 py-4 shadow-glow transition-all transform hover:-translate-y-1 w-full sm:w-auto min-w-[190px]">
+                    <span class="text-sm sm:text-md font-semibold">Get A Quote</span>
+                    <i class="fas fa-arrow-right ml-2 text-sm sm:text-md"></i>
+                </a>
+            </div>
+
+        </section>
+
+        <!-- Icons -->
+
+        <div class="w-full pb-10 z-10">
+            <div class="flex flex-col items-center">
+                <p class="text-[.6rem] md:text-sm text-gray-500 mb-8 font-medium tracking-widest uppercase opacity-80">
+                    Revolutionizing Client Solutions with the Best Tools
+                </p>
+
+                <div class="flex flex-wrap justify-center items-center gap-4 md:gap-8 px-4">
+
+                    <div
+                        class="group w-10 h-10 sm:w-12 sm:h-12 bg-white/5 rounded-full flex items-center justify-center border border-white/10 hover:border-[#21759b]/50 hover:bg-white/10 transition-all cursor-pointer shadow-lg backdrop-blur-sm">
+                        <i
+                            class="fab fa-wordpress text-xl sm:text-2xl text-[#21759b] group-hover:scale-110 transition-transform duration-300"></i>
+                    </div>
+
+                    <div
+                        class="group w-10 h-10 sm:w-12 sm:h-12 bg-white/5 rounded-full flex items-center justify-center border border-white/10 hover:border-blue-500/50 hover:bg-white/10 transition-all cursor-pointer shadow-lg backdrop-blur-sm">
+                        <i
+                            class="fab fa-css3-alt text-xl sm:text-2xl text-blue-500 group-hover:scale-110 transition-transform duration-300"></i>
+                    </div>
+
+                    <div
+                        class="group w-10 h-10 sm:w-12 sm:h-12 bg-white/5 rounded-full flex items-center justify-center border border-white/10 hover:border-orange-500/50 hover:bg-white/10 transition-all cursor-pointer shadow-lg backdrop-blur-sm">
+                        <i
+                            class="fab fa-html5 text-xl sm:text-2xl text-orange-500 group-hover:scale-110 transition-transform duration-300"></i>
+                    </div>
+
+                    <div
+                        class="group w-10 h-10 sm:w-12 sm:h-12 bg-white/5 rounded-full flex items-center justify-center border border-white/10 hover:border-yellow-400/50 hover:bg-white/10 transition-all cursor-pointer shadow-lg backdrop-blur-sm">
+                        <i
+                            class="fab fa-js text-xl sm:text-2xl text-yellow-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    </div>
+
+                    <div
+                        class="group w-10 h-10 sm:w-12 sm:h-12 bg-white/5 rounded-full flex items-center justify-center border border-white/10 hover:border-green-500/50 hover:bg-white/10 transition-all cursor-pointer shadow-lg backdrop-blur-sm">
+                        <i
+                            class="fab fa-node-js text-xl sm:text-2xl text-green-500 group-hover:scale-110 transition-transform duration-300"></i>
+                    </div>
+
+                    <div
+                        class="group w-10 h-10 sm:w-12 sm:h-12 bg-white/5 rounded-full flex items-center justify-center border border-white/10 hover:border-indigo-400/50 hover:bg-white/10 transition-all cursor-pointer shadow-lg backdrop-blur-sm">
+                        <i
+                            class="fab fa-php text-xl sm:text-2xl text-indigo-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    </div>
+
+                    <div
+                        class="group w-10 h-10 sm:w-12 sm:h-12 bg-white/5 rounded-full flex items-center justify-center border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all cursor-pointer shadow-lg backdrop-blur-sm">
+                        <i
+                            class="fas fa-code text-xl sm:text-2xl text-cyan-400 group-hover:scale-110 transition-transform duration-300"></i>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full py-6 overflow-hidden relative  bg-white/5 backdrop-blur-sm">
+            <div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-brand-dark to-transparent z-10"></div>
+            <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-brand-dark to-transparent z-10"></div>
+
+            <div
+                class="animate-marquee flex items-center gap-12 md:gap-24 opacity-40 grayscale contrast-125 hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                <div class="flex items-center gap-12 md:gap-24">
+                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-signature"></i> Sign</div>
+                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-infinity"></i> maze</div>
+                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-copyright"></i> Culture Amp</div>
+                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
+                            class="fab fa-y-combinator"></i> HELLOSIGN</div>
+                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-bolt"></i> TechFlow</div>
+                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-microchip"></i> Zenith</div>
+                </div>
+                <div class="flex items-center gap-12 md:gap-24">
+                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-signature"></i> Sign</div>
+                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-infinity"></i> maze</div>
+                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-copyright"></i> Culture Amp</div>
+                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
+                            class="fab fa-y-combinator"></i> HELLOSIGN</div>
+                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-bolt"></i> TechFlow</div>
+                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-microchip"></i> Zenith</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- About Us -->
+
+    <section class="w-full bg-brand-dark py-24 px-4 md:px-8 relative overflow-hidden">
+
+        <div
+            class="absolute top-1/4 left-0 w-[600px] h-[600px] bg-brand-primary/20 rounded-full blur-[120px] pointer-events-none animate-pulse">
+        </div>
+        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-secondary/20 rounded-full blur-[120px] pointer-events-none animate-pulse"
+            style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+
+                <div class="space-y-8">
+                    <div
+                        class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 backdrop-blur-md">
+                        <span class="text-brand-accent text-xs font-bold uppercase tracking-wider">★ About Us</span>
+                    </div>
+
+                    <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight">
+                        We blend creativity and data-driven insights to achieve <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-secondary">impactful
+                            results</span>
+                    </h2>
+
+                    <p class="text-gray-400 text-lg leading-relaxed">
+                        At Brand Godspeed, we craft innovative, data-driven marketing strategies to elevate your brand
+                        and drive results.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div
+                            class="group flex gap-4 p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
+                            <div
+                                class="w-10 h-10 rounded-full bg-brand-secondary/20 flex items-center justify-center text-brand-accent shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-check-double"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">Our Vision</h4>
+                                <p class="text-gray-400 text-sm">At Brand Godspeed, we craft innovative, data-driven
+                                    marketing strategies to elevate your brand and drive results.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="group flex gap-4 p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
+                            <div
+                                class="w-10 h-10 rounded-full bg-brand-secondary/20 flex items-center justify-center text-brand-accent shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">Our Mission</h4>
+                                <p class="text-gray-400 text-sm">To be the trusted partner for businesses worldwide,
+                                    setting the standard for innovation and excellence.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-6 pt-4">
+                        <a href="#"
+                            class="px-8 py-4 bg-gradient-to-r from-brand-secondary to-brand-primary text-white font-bold rounded-full shadow-[0_0_20px_rgba(44,102,110,0.4)] hover:scale-105 transition-transform">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <div class="flex items-center gap-2 text-gray-300 text-sm font-medium">
+                            <span
+                                class="w-8 h-8 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center">
+                                <i class="fas fa-thumbs-up text-xs"></i>
+                            </span>
+                            100% Satisfaction Guaranteed
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-brand-secondary to-brand-accent rounded-[3rem] transform rotate-6 opacity-20 blur-2xl">
+                    </div>
+
+                    <div class="relative rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl">
+                        <div class="absolute inset-0 bg-brand-dark/20 z-10 hover:bg-transparent transition-colors">
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Team" class="w-full h-[550px] object-cover">
+                    </div>
+
+                    <div
+                        class="absolute top-[40%] -left-8 md:-left-16 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl shadow-2xl w-48 animate-float z-20">
+                        <div class="flex justify-between items-center mb-3">
+                            <span
+                                class="text-[10px] bg-brand-accent text-brand-dark px-2 py-0.5 rounded-full font-bold">Market
+                                Static</span>
+                        </div>
+                        <div class="space-y-1 mb-2">
+                            <div class="h-1 w-3/4 bg-white/20 rounded-full"></div>
+                            <div class="h-1 w-1/2 bg-white/10 rounded-full"></div>
+                        </div>
+                        <svg class="w-full h-10" viewBox="0 0 100 40" fill="none">
+                            <path d="M0 30 Q 20 10, 40 25 T 100 5" stroke="#90DDF0" stroke-width="3" fill="none" />
+                        </svg>
+                    </div>
+
+                    <div class="absolute top-16 -right-6 md:-right-12 bg-white/10 backdrop-blur-xl border border-white/20 p-3 rounded-xl shadow-2xl flex items-center gap-3 z-20 animate-float"
+                        style="animation-delay: 1s;">
+                        <div
+                            class="w-10 h-10 rounded-full bg-brand-secondary/30 flex items-center justify-center text-brand-accent border border-brand-accent/30">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-white">Website Design</p>
+                            <p class="text-[10px] text-gray-300">09:30 - 10:40 AM</p>
+                        </div>
+                    </div>
+
+                    <div class="absolute bottom-10 -right-4 md:-right-8 bg-white text-brand-dark p-3 rounded-xl shadow-[0_0_30px_rgba(144,221,240,0.4)] flex items-center gap-3 z-20 animate-float"
+                        style="animation-delay: 2s;">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-secondary to-brand-primary flex items-center justify-center text-white">
+                            <i class="fab fa-slack text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-gray-500 uppercase">Total Subscribe</p>
+                            <p class="text-lg font-black">61.000</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="max-w-6xl mx-auto px-4 mt-16 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                    <div
+                        class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 flex items-center gap-6 hover:bg-brand-secondary/10 hover:border-brand-secondary/30 transition-all duration-300">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-brand-dark border border-white/10 flex items-center justify-center text-3xl text-brand-secondary group-hover:scale-110 transition-transform">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-3xl font-bold text-white">250+</h4>
+                            <p class="text-gray-400 text-sm uppercase tracking-wider">Projects Launched</p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 flex items-center gap-6 hover:bg-brand-accent/10 hover:border-brand-accent/30 transition-all duration-300">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-brand-dark border border-white/10 flex items-center justify-center text-3xl text-brand-accent group-hover:scale-110 transition-transform">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-3xl font-bold text-white">98%</h4>
+                            <p class="text-gray-400 text-sm uppercase tracking-wider">Client Satisfaction</p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="group bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 flex items-center gap-6 hover:bg-brand-primary/20 hover:border-brand-primary/40 transition-all duration-300">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-brand-dark border border-white/10 flex items-center justify-center text-3xl text-brand-primary group-hover:scale-110 transition-transform">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-3xl font-bold text-white">15+</h4>
+                            <p class="text-gray-400 text-sm uppercase tracking-wider">Design Awards</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Our Services -->
+
+    <section class="w-full bg-brand-dark py-24 px-4 md:px-8 relative overflow-hidden">
+
+        <div
+            class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/20 rounded-full blur-[120px] pointer-events-none animate-pulse">
+        </div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-secondary/10 rounded-full blur-[100px] pointer-events-none animate-pulse"
+            style="animation-delay: 3s;"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+
+            <div class="text-center max-w-4xl mx-auto mb-20">
+                <div
+                    class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6 backdrop-blur-md">
+                    <span class="text-brand-accent text-xs font-bold uppercase tracking-wider">★ Our Services</span>
+                </div>
+
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                    We deliver powerful solutions <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-secondary">excellence
+                        every time.</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <label class="relative cursor-pointer group">
+                    <input type="radio" name="cards" class="peer sr-only">
+
+                    <div class="h-full flex flex-col p-8 rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 
+                            peer-checked:bg-gradient-to-br peer-checked:from-brand-secondary/40 peer-checked:to-brand-primary/40 
+                            peer-checked:border-brand-accent/40 peer-checked:shadow-[0_0_40px_rgba(144,221,240,0.2)] 
+                            peer-checked:scale-105 peer-checked:z-20
+                            hover:bg-white/10 hover:border-white/20">
+
+                        <span class="absolute top-8 right-8 text-white/20 text-sm font-mono font-bold">01</span>
+
+                        <div
+                            class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-brand-accent transition-transform group-hover:scale-110 shadow-inner">
+                            <i class="fas fa-layer-group text-2xl"></i>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-4">UI/UX Design</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">Improve your search rankings and
+                            drive organic traffic with tailored SEO.</p>
+
+                        <div
+                            class="w-full py-3 px-6 rounded-full border border-white/10 flex items-center justify-between text-sm text-gray-300 backdrop-blur-md group-hover:bg-white/5 transition-all">
+                            <span>Learn More</span>
+                            <i class="fas fa-arrow-right text-[10px] bg-white/10 p-1.5 rounded-full"></i>
+                        </div>
+                    </div>
+                </label>
+
+                <label class="relative cursor-pointer group">
+                    <input type="radio" name="cards" class="peer sr-only" checked>
+
+                    <div class="h-full flex flex-col p-8 rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 
+                            peer-checked:bg-gradient-to-br peer-checked:from-brand-secondary/40 peer-checked:to-brand-primary/40 
+                            peer-checked:border-brand-accent/40 peer-checked:shadow-[0_0_40px_rgba(144,221,240,0.2)] 
+                            peer-checked:scale-105 peer-checked:z-20
+                            hover:bg-white/10 hover:border-white/20">
+
+                        <span class="absolute top-8 right-8 text-white/20 text-sm font-mono font-bold">02</span>
+
+                        <div
+                            class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-brand-accent transition-transform group-hover:scale-110 shadow-inner">
+                            <i class="fas fa-bullhorn text-2xl"></i>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-4">Social Media</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">Grow your brand and engage your
+                            audience with expert strategies.</p>
+
+                        <div
+                            class="w-full py-3 px-6 rounded-full border border-white/10 flex items-center justify-between text-sm text-gray-300 backdrop-blur-md group-hover:bg-white/5 transition-all">
+                            <span>Learn More</span>
+                            <i class="fas fa-arrow-right text-[10px] bg-white/10 p-1.5 rounded-full"></i>
+                        </div>
+                    </div>
+                </label>
+
+                <label class="relative cursor-pointer group">
+                    <input type="radio" name="cards" class="peer sr-only">
+
+                    <div class="h-full flex flex-col p-8 rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 
+                            peer-checked:bg-gradient-to-br peer-checked:from-brand-secondary/40 peer-checked:to-brand-primary/40 
+                            peer-checked:border-brand-accent/40 peer-checked:shadow-[0_0_40px_rgba(144,221,240,0.2)] 
+                            peer-checked:scale-105 peer-checked:z-20
+                            hover:bg-white/10 hover:border-white/20">
+
+                        <span class="absolute top-8 right-8 text-white/20 text-sm font-mono font-bold">03</span>
+
+                        <div
+                            class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-brand-accent transition-transform group-hover:scale-110 shadow-inner">
+                            <i class="fas fa-mouse-pointer text-2xl"></i>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-4">PPC Advertising</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">Drive instant traffic, boost
+                            conversions, and maximize ROI.</p>
+
+                        <div
+                            class="w-full py-3 px-6 rounded-full border border-white/10 flex items-center justify-between text-sm text-gray-300 backdrop-blur-md group-hover:bg-white/5 transition-all">
+                            <span>Learn More</span>
+                            <i class="fas fa-arrow-right text-[10px] bg-white/10 p-1.5 rounded-full"></i>
+                        </div>
+                    </div>
+                </label>
+
+                <label class="relative cursor-pointer group">
+                    <input type="radio" name="cards" class="peer sr-only">
+
+                    <div class="h-full flex flex-col p-8 rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 
+                            peer-checked:bg-gradient-to-br peer-checked:from-brand-secondary/40 peer-checked:to-brand-primary/40 
+                            peer-checked:border-brand-accent/40 peer-checked:shadow-[0_0_40px_rgba(144,221,240,0.2)] 
+                            peer-checked:scale-105 peer-checked:z-20
+                            hover:bg-white/10 hover:border-white/20">
+
+                        <span class="absolute top-8 right-8 text-white/20 text-sm font-mono font-bold">04</span>
+
+                        <div
+                            class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-brand-accent transition-transform group-hover:scale-110 shadow-inner">
+                            <i class="fas fa-pen-fancy text-2xl"></i>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-4">Content Marketing</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">Engage your audience, build
+                            trust, and boost visibility.</p>
+
+                        <div
+                            class="w-full py-3 px-6 rounded-full border border-white/10 flex items-center justify-between text-sm text-gray-300 backdrop-blur-md group-hover:bg-white/5 transition-all">
+                            <span>Learn More</span>
+                            <i class="fas fa-arrow-right text-[10px] bg-white/10 p-1.5 rounded-full"></i>
+                        </div>
+                    </div>
+                </label>
+
+                <label class="relative cursor-pointer group">
+                    <input type="radio" name="cards" class="peer sr-only">
+
+                    <div class="h-full flex flex-col p-8 rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 
+                            peer-checked:bg-gradient-to-br peer-checked:from-brand-secondary/40 peer-checked:to-brand-primary/40 
+                            peer-checked:border-brand-accent/40 peer-checked:shadow-[0_0_40px_rgba(144,221,240,0.2)] 
+                            peer-checked:scale-105 peer-checked:z-20
+                            hover:bg-white/10 hover:border-white/20">
+
+                        <span class="absolute top-8 right-8 text-white/20 text-sm font-mono font-bold">05</span>
+
+                        <div
+                            class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-brand-accent transition-transform group-hover:scale-110 shadow-inner">
+                            <i class="fas fa-fingerprint text-2xl"></i>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-4">Branding</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">Grow your brand with stunning
+                            visuals and creative designs.</p>
+
+                        <div
+                            class="w-full py-3 px-6 rounded-full border border-white/10 flex items-center justify-between text-sm text-gray-300 backdrop-blur-md group-hover:bg-white/5 transition-all">
+                            <span>Learn More</span>
+                            <i class="fas fa-arrow-right text-[10px] bg-white/10 p-1.5 rounded-full"></i>
+                        </div>
+                    </div>
+                </label>
+
+                <label class="relative cursor-pointer group">
+                    <input type="radio" name="cards" class="peer sr-only">
+
+                    <div class="h-full flex flex-col p-8 rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 
+                            peer-checked:bg-gradient-to-br peer-checked:from-brand-secondary/40 peer-checked:to-brand-primary/40 
+                            peer-checked:border-brand-accent/40 peer-checked:shadow-[0_0_40px_rgba(144,221,240,0.2)] 
+                            peer-checked:scale-105 peer-checked:z-20
+                            hover:bg-white/10 hover:border-white/20">
+
+                        <span class="absolute top-8 right-8 text-white/20 text-sm font-mono font-bold">06</span>
+
+                        <div
+                            class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-brand-accent transition-transform group-hover:scale-110 shadow-inner">
+                            <i class="fas fa-headset text-2xl"></i>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-4">Virtual Assistant</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">Streamline your tasks, save
+                            time, and boost productivity.</p>
+
+                        <div
+                            class="w-full py-3 px-6 rounded-full border border-white/10 flex items-center justify-between text-sm text-gray-300 backdrop-blur-md group-hover:bg-white/5 transition-all">
+                            <span>Learn More</span>
+                            <i class="fas fa-arrow-right text-[10px] bg-white/10 p-1.5 rounded-full"></i>
+                        </div>
+                    </div>
+                </label>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+
+    <section class="w-full bg-brand-dark py-24 px-4 md:px-8 relative overflow-hidden">
+
+        <div
+            class="absolute top-0 left-0 w-[600px] h-[600px] bg-brand-primary/30 rounded-full blur-[120px] pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-brand-secondary/20 rounded-full blur-[120px] pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+
+            <div class="mb-20 text-center">
+                <div
+                    class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6 backdrop-blur-md">
+                    <span class="text-brand-accent text-xs font-bold uppercase tracking-wider">★ Why Choose Us</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight max-w-3xl mx-auto">
+                    Help you find the best analysis for your <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-secondary">business
+                        growth.</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <div
+                    class="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 hover:bg-white/10 hover:border-brand-accent/30 transition-all duration-500 overflow-hidden shadow-2xl">
+                    <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
+
+                    <div class="relative h-56 w-full mb-6 flex flex-col items-center justify-center">
+                        <div class="flex gap-3 mb-4 translate-x-4">
+                            <div
+                                class="w-10 h-10 rounded-full bg-brand-dark/60 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg transform -translate-y-2">
+                                <span class="text-white font-mono text-sm">6</span>
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-full bg-brand-dark/60 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg">
+                                <i class="fas fa-plus text-brand-accent text-xs"></i>
+                            </div>
+                            <div
+                                class="w-12 h-12 rounded-xl bg-brand-dark border border-white/10 flex items-center justify-center shadow-2xl z-10">
+                                <i class="fab fa-wordpress text-2xl text-brand-accent"></i>
+                            </div>
+                        </div>
+
+                        <div
+                            class="w-24 h-24 bg-gradient-to-b from-brand-secondary/40 to-brand-dark/80 rounded-2xl border border-white/10 flex items-end justify-center overflow-hidden relative shadow-2xl backdrop-blur-sm group-hover:scale-105 transition-transform duration-500">
+                            <i class="fas fa-user text-6xl text-brand-light/50 translate-y-2"></i>
+                            <div class="absolute inset-0 bg-brand-accent/20 blur-xl"></div>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 text-center">
+                        <h3 class="text-xl font-bold text-white mb-2">6+ Years of Experience</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Set up a personalized profile quickly with guided steps.
+                        </p>
+                    </div>
+                </div>
+
+                <div
+                    class="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 hover:bg-white/10 hover:border-brand-accent/30 transition-all duration-500 overflow-hidden shadow-2xl">
+                    <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
+
+                    <div class="relative h-56 w-full mb-6 flex items-center justify-center">
+                        <div class="relative w-full h-full max-h-40 max-w-[200px]">
+                            <div
+                                class="absolute -top-6 -right-4 bg-brand-dark/80 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full flex items-center gap-2 shadow-xl z-20 animate-bounce">
+                                <span class="text-xs font-bold text-white">99% Rank</span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent"></span>
+                            </div>
+
+                            <svg class="absolute inset-0 w-full h-full overflow-visible z-0" viewBox="0 0 200 100">
+                                <path d="M20,80 Q60,80 80,50 T160,20" fill="none" stroke="rgba(255,255,255,0.1)"
+                                    stroke-width="2" stroke-dasharray="4 4" />
+                                <path d="M20,80 Q60,80 80,50" fill="none" stroke="#2C666E" stroke-width="2" />
+                                <path d="M80,50 T160,20" fill="none" stroke="#90DDF0" stroke-width="2" />
+                            </svg>
+
+                            <div
+                                class="absolute bottom-[20%] left-[10%] w-3 h-3 bg-brand-secondary rounded-full border border-brand-dark z-10">
+                            </div>
+                            <div
+                                class="absolute top-[50%] left-[40%] w-3 h-3 bg-white rounded-full border border-brand-dark shadow-[0_0_10px_white] z-10">
+                            </div>
+                            <div
+                                class="absolute top-[20%] right-[20%] w-3 h-3 bg-brand-accent rounded-full border border-brand-dark z-10 group-hover:scale-125 transition-transform">
+                            </div>
+
+                            <div class="absolute top-[25%] right-[18%] z-20 drop-shadow-lg">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M3 3L10.07 19.97L12.58 12.58L19.97 10.07L3 3Z" fill="#F0EDEE"
+                                        stroke="#0A090C" stroke-width="2" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 text-center">
+                        <h3 class="text-xl font-bold text-white mb-2">SEO-Optimized Ranking</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Streamline processes with rule-based task automation.
+                        </p>
+                    </div>
+                </div>
+
+                <div
+                    class="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 hover:bg-white/10 hover:border-brand-accent/30 transition-all duration-500 overflow-hidden shadow-2xl">
+                    <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
+
+                    <div class="relative h-56 w-full mb-6 flex items-center justify-center">
+                        <div
+                            class="relative w-40 h-32 bg-gradient-to-br from-brand-secondary/20 to-brand-primary/20 border border-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md group-hover:rotate-3 transition-transform duration-500 shadow-inner">
+                            <div
+                                class="absolute -top-3 left-0 w-16 h-4 bg-brand-secondary/20 border-t border-l border-r border-white/10 rounded-t-lg">
+                            </div>
+
+                            <div class="flex items-center gap-1 h-8">
+                                <div class="w-1 h-3 bg-brand-accent/50 rounded-full animate-pulse"></div>
+                                <div class="w-1 h-6 bg-brand-accent rounded-full animate-pulse"
+                                    style="animation-delay: 0.1s"></div>
+                                <div class="w-1 h-8 bg-brand-accent rounded-full animate-pulse"
+                                    style="animation-delay: 0.3s"></div>
+                                <div class="w-1 h-3 bg-brand-accent/30 rounded-full animate-pulse"
+                                    style="animation-delay: 0.5s"></div>
+                            </div>
+
+                            <div
+                                class="absolute -top-4 -right-4 w-10 h-10 bg-brand-dark/80 backdrop-blur-md border border-white/10 rounded-xl flex items-center justify-center shadow-lg transform rotate-12">
+                                <div
+                                    class="w-6 h-6 rounded-full border border-brand-accent flex items-center justify-center">
+                                    <i class="fas fa-check text-brand-accent text-[10px]"></i>
+                                </div>
+                            </div>
+
+                            <div
+                                class="absolute -bottom-4 -right-4 w-10 h-10 bg-brand-dark/80 backdrop-blur-md border border-white/10 rounded-xl flex items-center justify-center shadow-lg transform -rotate-6 z-20">
+                                <i class="fas fa-share text-white text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 text-center">
+                        <h3 class="text-xl font-bold text-white mb-2">On-Time Delivery</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Simplify sharing with a single click for any file size.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Valuable Feedback -->
+
+    <section class="w-full bg-brand-dark py-24 px-4 md:px-8 relative overflow-hidden border-t border-white/5">
+
+        <div
+            class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-brand-primary/20 rounded-full blur-[120px] pointer-events-none animate-pulse">
+        </div>
+        <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-brand-secondary/15 rounded-full blur-[100px] pointer-events-none animate-pulse"
+            style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+
+            <div class="text-center mb-20">
+                <div
+                    class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-8 backdrop-blur-md">
+                    <i class="fas fa-heart text-brand-accent text-xs"></i>
+                    <span class="text-brand-light/80 text-xs font-bold uppercase tracking-wider">Valuable
+                        Feedback</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white leading-tight">
+                    Trusted By The World's Fastest <br>
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-secondary">Growing
+                        Companies</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 items-stretch">
+
+                <div
+                    class="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 h-48 flex flex-col justify-between overflow-hidden group hover:bg-white/10 transition-all duration-300">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3 text-2xl font-bold text-white">
+                            <i class="fas fa-leaf text-brand-accent"></i> Greenish
+                        </div>
+                        <p class="text-gray-400 text-xs font-medium leading-tight text-right uppercase tracking-wider">
+                            Team<br>management</p>
+                    </div>
+                    <div
+                        class="absolute bottom-0 right-0 bg-brand-dark/40 backdrop-blur-md pl-6 pt-6 rounded-tl-[2.5rem] border-t border-l border-white/10">
+                        <div
+                            class="px-5 py-2 rounded-full border border-white/10 text-[10px] font-bold text-white bg-brand-accent/10 group-hover:border-brand-accent/50 transition-colors">
+                            195% Growth
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 h-48 flex flex-col justify-between overflow-hidden group hover:bg-white/10 transition-all duration-300">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3 text-2xl font-bold text-white">
+                            <i class="fas fa-chart-line text-brand-secondary"></i> Rise™
+                        </div>
+                        <p class="text-gray-400 text-xs font-medium leading-tight text-right uppercase tracking-wider">
+                            Project<br>management</p>
+                    </div>
+                    <div
+                        class="absolute bottom-0 right-0 bg-brand-dark/40 backdrop-blur-md pl-6 pt-6 rounded-tl-[2.5rem] border-t border-l border-white/10">
+                        <div
+                            class="px-5 py-2 rounded-full border border-white/10 text-[10px] font-bold text-white bg-brand-accent/10 group-hover:border-brand-accent/50 transition-colors">
+                            256% Growth
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 h-48 flex flex-col justify-between overflow-hidden group hover:bg-white/10 transition-all duration-300">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3 text-2xl font-bold text-white">
+                            <i class="fas fa-project-diagram text-brand-primary"></i> Network
+                        </div>
+                        <p class="text-gray-400 text-xs font-medium leading-tight text-right uppercase tracking-wider">
+                            Secure<br>Storages</p>
+                    </div>
+                    <div
+                        class="absolute bottom-0 right-0 bg-brand-dark/40 backdrop-blur-md pl-6 pt-6 rounded-tl-[2.5rem] border-t border-l border-white/10">
+                        <div
+                            class="px-5 py-2 rounded-full border border-white/10 text-[10px] font-bold text-white bg-brand-accent/10 group-hover:border-brand-accent/50 transition-colors">
+                            256% Growth
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24 items-stretch">
+
+                <div
+                    class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.2rem] p-8 hover:bg-white/10 hover:border-brand-secondary/40 transition-all group flex flex-col h-full shadow-xl">
+                    <p class="text-gray-300 text-sm leading-relaxed mb-8 flex-grow">
+                        "Their team are easy to work with and helped me make amazing website in a short amount of time.
+                        Thanks guys for all your hard work."
+                    </p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.pravatar.cc/150?u=11"
+                                class="w-10 h-10 rounded-full grayscale group-hover:grayscale-0 transition-all border border-white/20">
+                            <span class="text-white text-sm font-bold">Matthew Miller</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-1 text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+                            <i class="fas fa-leaf text-brand-accent"></i> Greenish
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.2rem] p-8 hover:bg-white/10 hover:border-brand-secondary/40 transition-all group flex flex-col h-full shadow-xl">
+                    <p class="text-gray-300 text-sm leading-relaxed mb-8 flex-grow">
+                        "Exceptional communication and a very professional final product. The team went above and beyond
+                        our expectations in every phase."
+                    </p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.pravatar.cc/150?u=44"
+                                class="w-10 h-10 rounded-full grayscale group-hover:grayscale-0 transition-all border border-white/20">
+                            <span class="text-white text-sm font-bold">James Wilson</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-1 text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+                            <i class="fas fa-leaf text-brand-accent"></i> Greenish
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.2rem] p-8 hover:bg-white/10 hover:border-brand-secondary/40 transition-all group flex flex-col h-full shadow-xl">
+                    <p class="text-gray-300 text-sm leading-relaxed mb-8 flex-grow">
+                        "A fantastic experience. The branding they created for Network is exactly what we needed to
+                        stand out in a crowded market."
+                    </p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.pravatar.cc/150?u=66"
+                                class="w-10 h-10 rounded-full grayscale group-hover:grayscale-0 transition-all border border-white/20">
+                            <span class="text-white text-sm font-bold">Alex Turn</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-1 text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+                            <i class="fas fa-project-diagram text-brand-primary"></i> Network
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.2rem] p-8 hover:bg-white/10 hover:border-brand-secondary/40 transition-all group flex flex-col h-full shadow-xl">
+                    <p class="text-gray-300 text-sm leading-relaxed mb-8 flex-grow">
+                        "Reliable and creative. The virtual assistant services and web support have been a game changer
+                        for our daily operations."
+                    </p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.pravatar.cc/150?u=55"
+                                class="w-10 h-10 rounded-full grayscale group-hover:grayscale-0 transition-all border border-white/20">
+                            <span class="text-white text-sm font-bold">Emily White</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-1 text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+                            <i class="fas fa-chart-line text-brand-secondary"></i> Rise™
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.2rem] p-8 hover:bg-white/10 hover:border-brand-secondary/40 transition-all group flex flex-col h-full shadow-xl">
+                    <p class="text-gray-300 text-sm leading-relaxed mb-8 flex-grow">
+                        "The best WordPress solution we've found so far. Fast, reliable, and extremely modern design
+                        approach."
+                    </p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.pravatar.cc/150?u=33"
+                                class="w-10 h-10 rounded-full grayscale group-hover:grayscale-0 transition-all border border-white/20">
+                            <span class="text-white text-sm font-bold">Sarah Jones</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-1 text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+                            <i class="fas fa-project-diagram text-brand-primary"></i> Network
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.2rem] p-8 hover:bg-white/10 hover:border-brand-secondary/40 transition-all group flex flex-col h-full shadow-xl">
+                    <p class="text-gray-300 text-sm leading-relaxed mb-8 flex-grow">
+                        "Top-notch SEO strategies. We saw a significant increase in organic traffic and user engagement
+                        within weeks."
+                    </p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.pravatar.cc/150?u=8"
+                                class="w-10 h-10 rounded-full grayscale group-hover:grayscale-0 transition-all border border-white/20">
+                            <span class="text-white text-sm font-bold">Michael Scott</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-1 text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+                            <i class="fas fa-chart-line text-brand-secondary"></i> Rise™
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Creative Powerhouse -->
+
+    <section class="w-full bg-brand-dark py-24 relative overflow-hidden flex flex-col justify-center">
+
+        <div
+            class="absolute top-0 left-1/4 w-[800px] h-[800px] bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none animate-pulse">
+        </div>
+        <div class="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-brand-secondary/10 rounded-full blur-[120px] pointer-events-none animate-pulse"
+            style="animation-delay: 2s;"></div>
+
+        <div class="relative z-20 flex justify-center mb-10">
+            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-brand-accent/30 bg-brand-accent/5 backdrop-blur-md shadow-[0_0_20px_rgba(44,102,110,0.3)] animate-bounce"
+                style="animation-duration: 4s;">
+                <span class="relative flex h-3 w-3">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-accent"></span>
+                </span>
+                <span class="text-brand-accent text-xs font-bold uppercase tracking-[0.2em]">Creative Powerhouse</span>
+            </div>
+        </div>
+
+        <div class="relative z-10 py-8 overflow-hidden">
+
+            <div class="animate-marquee-text flex items-center relative left-0">
+                <div class="flex items-center gap-16 px-8">
+                    <span
+                        class="text-5xl md:text-7xl font-black text-white tracking-tighter drop-shadow-2xl">Strategy</span>
+                    <i
+                        class="fas fa-asterisk text-2xl md:text-3xl text-brand-secondary animate-spin-slow opacity-80"></i>
+
+                    <span
+                        class="text-5xl md:text-7xl font-black text-transparent tracking-tighter transition-all hover:text-white/10"
+                        style="-webkit-text-stroke: 1px rgba(144,221,240,0.5);">Design</span>
+                    <i class="fas fa-asterisk text-2xl md:text-3xl text-brand-accent animate-spin-slow opacity-80"></i>
+
+                    <span
+                        class="text-5xl md:text-7xl font-black text-white tracking-tighter drop-shadow-2xl">Development</span>
+                    <i
+                        class="fas fa-asterisk text-2xl md:text-3xl text-brand-secondary animate-spin-slow opacity-80"></i>
+
+                    <span
+                        class="text-5xl md:text-7xl font-black text-transparent tracking-tighter transition-all hover:text-white/10"
+                        style="-webkit-text-stroke: 1px rgba(144,221,240,0.5);">Marketing</span>
+                    <i
+                        class="fas fa-asterisk text-2xl md:text-3xl text-brand-accent animate-spin-slow opacity-80 pr-16"></i>
+                </div>
+                <div class="flex items-center gap-16 px-8" aria-hidden="true">
+                    <span
+                        class="text-5xl md:text-7xl font-black text-white tracking-tighter drop-shadow-2xl">Strategy</span>
+                    <i
+                        class="fas fa-asterisk text-2xl md:text-3xl text-brand-secondary animate-spin-slow opacity-80"></i>
+
+                    <span
+                        class="text-5xl md:text-7xl font-black text-transparent tracking-tighter transition-all hover:text-white/10"
+                        style="-webkit-text-stroke: 1px rgba(144,221,240,0.5);">Design</span>
+                    <i class="fas fa-asterisk text-2xl md:text-3xl text-brand-accent animate-spin-slow opacity-80"></i>
+
+                    <span
+                        class="text-5xl md:text-7xl font-black text-white tracking-tighter drop-shadow-2xl">Development</span>
+                    <i
+                        class="fas fa-asterisk text-2xl md:text-3xl text-brand-secondary animate-spin-slow opacity-80"></i>
+
+                    <span
+                        class="text-5xl md:text-7xl font-black text-transparent tracking-tighter transition-all hover:text-white/10"
+                        style="-webkit-text-stroke: 1px rgba(144,221,240,0.5);">Marketing</span>
+                    <i
+                        class="fas fa-asterisk text-2xl md:text-3xl text-brand-accent animate-spin-slow opacity-80 pr-16"></i>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Our Projects -->
+
+    <section class="w-full bg-brand-dark py-24 px-4 md:px-8 relative overflow-hidden">
+
+        <div
+            class="absolute top-0 right-1/4 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none animate-pulse">
+        </div>
+        <div class="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-teal-400/10 rounded-full blur-[120px] pointer-events-none animate-pulse"
+            style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div class="relative">
+                    <p class="text-gray-400 font-medium mb-2 pl-1">See Our Portfolio Reels</p>
+                    <h2 class="text-5xl md:text-7xl font-medium text-white leading-tight flex flex-col md:block">
+                        Awesome
+                        <span class="flex items-center gap-4">
+                            <span
+                                class="relative inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 border border-white/20 rounded-full animate-spin-slow">
+                                <span class="absolute inset-0 rounded-full border border-white/20 rotate-45"></span>
+                                <span class="absolute inset-0 rounded-full border border-white/20 -rotate-45"></span>
+                            </span>
+                            works
+                        </span>
+                    </h2>
+                </div>
+
+                <div class="max-w-sm md:text-right flex flex-col items-start md:items-end gap-6">
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        We crafted detailed botanical illustrations to highlight the natural ingredients used in the
+                        products. Each design was carefully integrated.
+                    </p>
+                    <a href="#"
+                        class="group flex items-center gap-4 px-8 py-3 rounded-full border border-white/20 text-white hover:bg-white hover:text-brand-dark transition-all duration-300">
+                        <span class="font-medium">Learn More</span>
+                        <i
+                            class="fas fa-arrow-up rotate-45 group-hover:rotate-90 transition-transform duration-300"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <div class="group flex flex-col gap-6">
+                    <div
+                        class="relative bg-[#1A1825] rounded-[2.5rem] p-4 overflow-hidden h-[400px] border border-white/5 hover:border-brand-accent/30 transition-all duration-500">
+                        <div
+                            class="w-full h-full bg-gradient-to-br from-indigo-500/20 to-purple-600/20 rounded-[2rem] relative overflow-hidden group-hover:scale-[0.98] transition-transform duration-500">
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-screen"
+                                alt="AI Art">
+
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl">
+                                    <h4 class="text-white font-bold text-lg leading-tight mb-2">Artificial Intelligence
+                                        & Bioinformatics</h4>
+                                    <div class="flex items-center gap-2">
+                                        <span class="h-1 w-full bg-white/20 rounded-full overflow-hidden">
+                                            <span class="h-full w-[70%] bg-indigo-400 block"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-2 flex justify-between items-end border-t border-white/10 pt-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-brand-light mb-1">Betely Agency</h3>
+                            <p class="text-sm text-gray-500">UI/UX Website Design</p>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark transition-all duration-300 cursor-pointer">
+                            <i class="fas fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group flex flex-col gap-6">
+                    <div
+                        class="relative bg-[#1A1825] rounded-[2.5rem] p-4 overflow-hidden h-[400px] border border-white/5 hover:border-brand-accent/30 transition-all duration-500">
+                        <div
+                            class="w-full h-full bg-[#E5D4FF] rounded-[2rem] relative overflow-hidden group-hover:scale-[0.98] transition-transform duration-500 flex items-center justify-center">
+
+                            <div
+                                class="relative w-[180px] h-[320px] bg-black rounded-[2rem] border-4 border-gray-800 shadow-2xl transform rotate-[-5deg] translate-x-4 translate-y-8 overflow-hidden">
+                                <div class="absolute inset-0 bg-gray-900 flex flex-col p-4">
+                                    <div class="w-full h-24 bg-yellow-300 rounded-xl mb-3"></div>
+                                    <div class="w-full h-12 bg-gray-800 rounded-xl mb-2 border border-white/10"></div>
+                                    <div class="w-1/2 h-8 bg-gray-800 rounded-xl mb-4 border border-white/10"></div>
+                                    <div class="mt-auto w-full h-16 bg-white/10 rounded-xl backdrop-blur-md"></div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="absolute top-10 left-[-20px] w-[140px] h-[200px] bg-purple-500 rounded-[1.5rem] shadow-xl transform rotate-[10deg] opacity-90 z-0">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="px-2 flex justify-between items-end border-t border-white/10 pt-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-brand-light mb-1">Growthy</h3>
+                            <p class="text-sm text-gray-500">UI/UX Mobile App Design</p>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark transition-all duration-300 cursor-pointer">
+                            <i class="fas fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group flex flex-col gap-6">
+                    <div
+                        class="relative bg-[#1A1825] rounded-[2.5rem] p-4 overflow-hidden h-[400px] border border-white/5 hover:border-brand-accent/30 transition-all duration-500">
+                        <div
+                            class="w-full h-full bg-[#F0F5F2] rounded-[2rem] relative overflow-hidden group-hover:scale-[0.98] transition-transform duration-500 p-4 grid grid-cols-2 gap-2">
+
+                            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                                class="w-full h-full object-cover rounded-2xl col-span-1 row-span-2" alt="Nature">
+                            <div class="bg-white rounded-2xl flex items-center justify-center p-2">
+                                <i class="fas fa-leaf text-green-600 text-3xl"></i>
+                            </div>
+                            <div class="bg-emerald-800 rounded-2xl p-3 flex flex-col justify-between text-white">
+                                <span class="text-[10px] uppercase opacity-70">Healthy</span>
+                                <span class="text-lg font-serif">Flourish</span>
+                            </div>
+                            <div class="col-span-2 bg-white rounded-2xl p-4 flex items-center justify-between">
+                                <span class="text-emerald-900 font-bold text-xl leading-none">Healthy <br>Future</span>
+                                <img src="https://images.unsplash.com/photo-1511690656952-34342d5c2895?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                                    class="w-12 h-12 rounded-full object-cover">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="px-2 flex justify-between items-end border-t border-white/10 pt-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-brand-light mb-1">Alpnace</h3>
+                            <p class="text-sm text-gray-500">Branding Design</p>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark transition-all duration-300 cursor-pointer">
+                            <i class="fas fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Pricing & FAQs -->
+
+    <section class="w-full bg-brand-dark py-24 px-4 md:px-8 relative overflow-hidden">
+
+        <div
+            class="absolute top-[10%] left-1/4 w-[700px] h-[700px] bg-purple-600/20 rounded-full blur-[150px] pointer-events-none animate-pulse">
+        </div>
+        <div class="absolute bottom-[10%] right-1/4 w-[600px] h-[600px] bg-brand-accent/20 rounded-full blur-[150px] pointer-events-none animate-pulse"
+            style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <div
+                    class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6 backdrop-blur-md">
+                    <span class="text-brand-accent text-xs font-bold uppercase tracking-wider">Pricing</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                    Choose the Right Plan for Your Business
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32 items-center">
+
+                <label class="group relative cursor-pointer">
+                    <input type="radio" name="pricing_plan" class="peer sr-only">
+
+                    <div class="h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 transition-all duration-500 
+                            hover:bg-white/10 
+                            peer-checked:bg-gradient-to-b peer-checked:from-white/10 peer-checked:to-white/5 
+                            peer-checked:border-brand-accent/50 peer-checked:shadow-[0_0_50px_rgba(139,92,246,0.15)] 
+                            peer-checked:scale-105 peer-checked:z-10 peer-checked:-translate-y-2">
+
+                        <h3 class="text-white text-md font-medium mb-4 group-hover:text-brand-accent transition-colors">
+                            3 Pages Template</h3>
+                        <div class="flex items-baseline gap-2 mb-4">
+                            <span class="text-4xl font-bold text-white">$599</span>
+                            <span class="text-gray-400 text-sm">/Starting</span>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-8">Ideal for freelancers and small businesses
+                            just starting out.</p>
+
+                        <div
+                            class="py-4 rounded-full border border-white/20 text-white text-sm font-semibold text-center transition-all mb-6
+                                group-hover:bg-white/5
+                                peer-checked:bg-gradient-to-r peer-checked:from-brand-accent peer-checked:to-brand-accent peer-checked:border-transparent peer-checked:shadow-lg">
+                            <a href="#" class="py-4 px-14 ">Book a Demo</a>
+                        </div>
+
+                        <div
+                            class="relative text-center text-xs text-white mb-8 after:absolute after:top-1/2 after:left-0 after:w-full after:h-[1px] after:bg-white/10 after:z-0">
+                            <span class="relative z-10 bg-brand-accent px-4 py-1 backdrop-blur-xl rounded-full">What you will
+                                get</span>
+                        </div>
+
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3 text-gray-300 text-sm"><i
+                                    class="fas fa-check-circle text-brand-accent"></i> Includes home, about & contact
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-300 text-sm"><i
+                                    class="fas fa-check-circle text-brand-accent"></i> Fully responsive design</li>
+                            <li class="flex items-center gap-3 text-gray-300 text-sm"><i
+                                    class="fas fa-check-circle text-brand-accent"></i> Basic SEO setup included</li>
+                        </ul>
+                    </div>
+                </label>
+
+                <label class="group relative cursor-pointer">
+                    <input type="radio" name="pricing_plan" class="peer sr-only">
+
+                    <div class="h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 transition-all duration-500 
+                            hover:bg-white/10 
+                            peer-checked:bg-gradient-to-b peer-checked:from-white/10 peer-checked:to-white/5 
+                            peer-checked:border-brand-accent/50 peer-checked:shadow-[0_0_50px_rgba(139,92,246,0.15)] 
+                            peer-checked:scale-105 peer-checked:z-10 peer-checked:-translate-y-2">
+
+                        <h3 class="text-white text-md font-medium mb-4 group-hover:text-brand-accent transition-colors">
+                            3 Pages Template</h3>
+                        <div class="flex items-baseline gap-2 mb-4">
+                            <span class="text-4xl font-bold text-white">$599</span>
+                            <span class="text-gray-400 text-sm">/Starting</span>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-8">Ideal for freelancers and small businesses
+                            just starting out.</p>
+
+                        <div
+                            class="py-4 rounded-full border border-white/20 text-white text-sm font-semibold text-center transition-all mb-6
+                                group-hover:bg-white/5
+                                peer-checked:bg-gradient-to-r peer-checked:from-brand-accent peer-checked:to-brand-accent peer-checked:border-transparent peer-checked:shadow-lg">
+                            <a href="#" class="py-4 px-14 ">Book a Demo</a>
+                        </div>
+
+                        <div
+                            class="relative text-center text-xs text-white mb-8 after:absolute after:top-1/2 after:left-0 after:w-full after:h-[1px] after:bg-white/10 after:z-0">
+                            <span class="relative z-10 bg-brand-accent px-4 py-1 backdrop-blur-xl rounded-full">What you will
+                                get</span>
+                        </div>
+
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3 text-gray-300 text-sm"><i
+                                    class="fas fa-check-circle text-brand-accent"></i> Includes home, about & contact
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-300 text-sm"><i
+                                    class="fas fa-check-circle text-brand-accent"></i> Fully responsive design</li>
+                            <li class="flex items-center gap-3 text-gray-300 text-sm"><i
+                                    class="fas fa-check-circle text-brand-accent"></i> Basic SEO setup included</li>
+                        </ul>
+                    </div>
+                </label>
+            </div>
+
+            <!-- FAQ -->
+
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div
+                    class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6 backdrop-blur-md">
+                    <span class="text-brand-accent text-xs font-bold uppercase tracking-wider">FAQs</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                    Frequently Asked Questions
+                </h2>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4 p-4">
+
+                <div class="faq-item group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer hover:bg-white/10"
+                    onclick="toggleFaq(this)">
+
+                    <div class="flex items-center justify-between p-4 select-none">
+                        <h4 class="text-md font-medium flex items-center justify-center text-white transition-colors duration-300 pr-4 gap-4 faq-title">
+                            <i class="fa-regular fa-circle-question text-brand-accent "></i>
+                            What Niche Geeky features are included
+                        </h4>
+
+                        <!-- + & - Icon -->
+                        <div
+                            class="relative w-10 h-10 flex-shrink-0 flex items-center justify-center bg-white/5 rounded-full border border-white/10 transition-all duration-500 icon-box">
+                            <div class="absolute w-0.5 h-4 bg-brand-accent transition-all duration-500 vertical-line">
+                            </div>
+                            <div class="absolute w-4 h-0.5 bg-brand-accent transition-all duration-500 horizontal-line">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <div class="px-6 pb-8 text-gray-400 text-sm leading-relaxed border-t border-white/5 pt-4 mt-2">
+                            <p>Power to founders with exceptional entrepreneurs and the world's leading companies
+                                founders with exceptional entrepreneurs.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <style>
+
+                .rotate-icon {
+                    transform: rotate(90deg);
+                    opacity: 0;
+                }
+            </style>
+
+            <script>
+                function toggleFaq(element) {
+                    const content = element.querySelector('.faq-content');
+                    const title = element.querySelector('.faq-title');
+                    const iconBox = element.querySelector('.icon-box');
+                    const verticalLine = element.querySelector('.vertical-line');
+                    const horizontalLine = element.querySelector('.horizontal-line');
+
+                    // Close all other items
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        if (item !== element) {
+                            item.classList.remove('faq-active');
+                            item.querySelector('.faq-content').style.maxHeight = null;
+                            item.querySelector('.faq-title').classList.remove('text-accent');
+                            item.querySelector('.icon-box').classList.remove('icon-active');
+                            item.querySelector('.vertical-line').classList.remove('rotate-icon');
+                            item.querySelector('.horizontal-line').classList.remove('bg-accent');
+                        }
+                    });
+
+                    // Toggle current item
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        element.classList.remove('faq-active');
+                        title.classList.remove('text-accent');
+                        iconBox.classList.remove('icon-active');
+                        verticalLine.classList.remove('rotate-icon');
+                        horizontalLine.classList.remove('bg-accent');
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        element.classList.add('faq-active');
+                        title.classList.add('text-accent');
+                        iconBox.classList.add('icon-active');
+                        verticalLine.classList.add('rotate-icon');
+                        horizontalLine.classList.add('bg-accent');
+                    }
+                }
+            </script>
+
+        </div>
+    </section>
+
+
+
+
+    <!-- Lets Talk Us  -->
+
+    <section class="w-full bg-brand-dark py-24 px-4 md:px-8 relative overflow-hidden">
+
+        <div
+            class="absolute top-0 left-0 w-[600px] h-[600px] bg-brand-secondary/20 rounded-full blur-[150px] pointer-events-none animate-pulse">
+        </div>
+        <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-brand-primary/20 rounded-full blur-[150px] pointer-events-none animate-pulse"
+            style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                <div class="space-y-8">
+                    <div
+                        class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 backdrop-blur-md">
+                        <span class="text-brand-accent text-xs font-bold uppercase tracking-wider">Let's Talk</span>
+                    </div>
+
+                    <h2 class="text-5xl md:text-5xl font-black text-white leading-tight">
+                        Have a Project <br>
+                        in Mind? <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-secondary">
+                            Let's Talk</span>
+                    </h2>
+
+                    <p class="text-gray-400 text-md  leading-relaxed max-w-md border-l-2 border-brand-accent/30 pl-6">
+                        Good design isn't just about aesthetics—it's about results. Learn how thoughtful UX strategies
+                        can turn casual visitors into loyal customers.
+                    </p>
+
+                    <div class="pt-4">
+                        <button
+                            class="group relative px-8 py-4 bg-white text-brand-dark font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                            <span class="relative z-10 text-sm flex items-center gap-3">
+                                Get In Touch
+                                <i
+                                    class="fas fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300"></i>
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6 pt-8 mt-8 border-t border-white/10">
+                        <div>
+                            <h4 class="text-gray-500 text-xs uppercase tracking-wider mb-2">Email Us</h4>
+                            <p class="text-white font-medium">hello@agency.com</p>
+                        </div>
+                        <div>
+                            <h4 class="text-gray-500 text-xs uppercase tracking-wider mb-2">Call Us</h4>
+                            <p class="text-white font-medium">+64 (0245) 6458</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-brand-accent to-purple-600 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200">
+                    </div>
+
+                    <div
+                        class="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[1rem] p-5 md:p-8 shadow-xl">
+
+                        <h3 class="text-xl font-bold text-white mb-8">Schedule a Free Consultation</h3>
+
+                        <form class="space-y-3 w-54">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Full
+                                        Name</label>
+                                    <input type="text" placeholder="John Doe"
+                                        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent/50 focus:bg-white/10 transition-all">
+                                </div>
+
+                                <div>
+                                    <label
+                                        class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Phone</label>
+                                    <input type="tel" placeholder="+1 (555) 000-0000"
+                                        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent/50 focus:bg-white/10 transition-all">
+                                </div>
+
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label
+                                        class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">How
+                                        Can We Help?</label>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white appearance-none focus:outline-none focus:border-brand-accent/50 cursor-pointer">
+                                            <option class="bg-brand-accent text-white">Select Option</option>
+                                            <option class="bg-brand-accent">Web Design</option>
+                                            <option class="bg-brand-accent">Branding</option>
+                                            <option class="bg-brand-accent">Marketing</option>
+                                        </select>
+                                        <i
+                                            class="fas fa-chevron-down absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label
+                                        class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Budget</label>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white appearance-none focus:outline-none focus:border-brand-accent/50 cursor-pointer">
+                                            <option class="bg-brand-accent text-white">Select Range</option>
+                                            <option class="bg-brand-accent">$1k - $5k</option>
+                                            <option class="bg-brand-accent">$5k - $10k</option>
+                                            <option class="bg-brand-accent">$10k+</option>
+                                        </select>
+                                        <i
+                                            class="fas fa-chevron-down absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label
+                                    class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Description</label>
+                                <textarea rows="3" placeholder="Tell us about your project..."
+                                    class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent/50 focus:bg-white/10 transition-all resize-none"></textarea>
+                            </div>
+
+                            <button type="button"
+                                class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-secondary to-brand-primary text-white font-bold tracking-wide  hover:scale-[1.01] transition-all duration-300">
+                                Get In Touch
+                            </button>   
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="relative mt-24 border-t border-white/5 py-8 bg-black/20 backdrop-blur-sm overflow-hidden">
+            <div class="animate-marquee-text flex items-center gap-16 whitespace-nowrap">
+                <div class="flex items-center gap-8">
+                    <span class="text-4xl md:text-6xl font-black text-transparent"
+                        style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Get In Touch For Project</span>
+                    <span class="text-4xl md:text-6xl font-black text-white">•</span>
+                    <span class="text-4xl md:text-6xl font-black text-white">+64 (0245) 6458</span>
+                    <span class="text-4xl md:text-6xl font-black text-white">•</span>
+                </div>
+                <div class="flex items-center gap-8">
+                    <span class="text-4xl md:text-6xl font-black text-transparent"
+                        style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Get In Touch For Project</span>
+                    <span class="text-4xl md:text-6xl font-black text-white">•</span>
+                    <span class="text-4xl md:text-6xl font-black text-white">+64 (0245) 6458</span>
+                    <span class="text-4xl md:text-6xl font-black text-white">•</span>
+                </div>
+                <div class="flex items-center gap-8">
+                    <span class="text-4xl md:text-6xl font-black text-transparent"
+                        style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">Get In Touch For Project</span>
+                    <span class="text-4xl md:text-6xl font-black text-white">•</span>
+                    <span class="text-4xl md:text-6xl font-black text-white">+64 (0245) 6458</span>
+                    <span class="text-4xl md:text-6xl font-black text-white">•</span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+
+    <footer class="w-full bg-brand-dark pt-32 pb-24 relative overflow-hidden">
+
+        <div
+            class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-[500px] bg-brand-primary/10 rounded-full blur-[100px] pointer-events-none animate-pulse">
+        </div>
+        <div class="absolute top-[20%] right-[5%] w-[400px] h-[400px] bg-brand-secondary/10 rounded-full blur-[120px] pointer-events-none animate-pulse"
+            style="animation-delay: 2s;"></div>
+
+        <div class="max-w-[95%] mx-auto relative z-10 animate-float">
+
+            <div class="absolute -top-14 right-0 md:right-12 z-20 flex flex-col items-end group">
+                <div
+                    class="bg-white text-brand-dark px-2 py-2 rounded-full flex gap-2 shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-transform hover:scale-105 duration-300">
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-brand-dark text-white flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark hover:rotate-12 transition-all duration-300">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-brand-dark text-white flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark hover:-rotate-12 transition-all duration-300">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-brand-dark text-white flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark hover:rotate-12 transition-all duration-300">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-brand-dark text-white flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark hover:-rotate-12 transition-all duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <div
+                    class="w-8 h-8 -mt-4 mr-6 bg-transparent rounded-tr-full shadow-[10px_-10px_0_0_rgba(255,255,255,0.05)] pointer-events-none hidden md:block">
+                </div>
+            </div>
+
+            <div
+                class="glass-shine bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[3rem] md:rounded-tr-[0rem] lg:rounded-tr-[5rem] p-8 md:p-12 relative shadow-2xl overflow-hidden hover:border-white/20 transition-colors duration-500">
+
+                <div class="absolute inset-0 bg-grid opacity-10 pointer-events-none"></div>
+
+                <div class="relative z-10 mb-10">
+                    <p class="text-gray-400 text-base md:text-lg mb-2 font-medium flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                        Got a project? Need an Unfair Advantage?
+                    </p>
+                    <h1 class="text-4xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter leading-none">
+                        Crafting
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-purple-400 to-brand-secondary animate-gradient-text opacity-90">Since
+                            2026</span>
+                    </h1>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 relative z-10 border-t border-white/10 pt-10">
+
+                    <div class="lg:col-span-5 flex flex-col justify-between h-full pr-8">
+                        <div>
+                            <h4 class="text-white font-bold mb-2">Subscribe newsletter</h4>
+                            <p class="text-gray-400 text-sm mb-6">Subscribe to get the latest news and updates!</p>
+
+                            <form class="relative max-w-md group/input">
+                                <div
+                                    class="absolute inset-y-0 left-4 flex items-center text-gray-500 group-focus-within/input:text-brand-accent transition-colors">
+                                    <i class="far fa-envelope"></i>
+                                </div>
+                                <input type="email" placeholder="enter your email"
+                                    class="w-full bg-white/5 border border-white/10 rounded-full py-3 pl-12 pr-32 text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-brand-accent/50 transition-all shadow-inner">
+                                <button type="submit"
+                                    class="absolute right-1.5 top-1.5 bottom-1.5 bg-brand-accent text-brand-dark font-bold px-5 rounded-full hover:bg-white hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all transform active:scale-95 text-sm">
+                                    Subscribe
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="mt-10 lg:mt-16">
+                            <div
+                                class="flex items-center gap-2 text-2xl font-black text-white tracking-tighter mb-2 group">
+                                <span
+                                    class="text-brand-accent group-hover:rotate-180 transition-transform duration-700 inline-block"><i
+                                        class="fas fa-bolt"></i></span> Flowmo
+                            </div>
+                            <p class="text-gray-500 text-xs max-w-xs leading-relaxed">
+                                Gearing your company through an innovative strategy. We build digital products that
+                                scale.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                            <div>
+                                <h4 class="text-gray-500 text-xs font-bold uppercase tracking-wider mb-4">Company</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="#"
+                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Who
+                                            we are</a></li>
+                                    <li><a href="#"
+                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Our
+                                            services</a></li>
+                                    <li><a href="#"
+                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Our
+                                            clients</a></li>
+                                    <li><a href="#"
+                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Contact
+                                            us</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-gray-500 text-xs font-bold uppercase tracking-wider mb-4">Services</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="#"
+                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Planning</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Research</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Consulting</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Analysis</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-gray-500 text-xs font-bold uppercase tracking-wider mb-4">Customer</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="#"
+                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Client
+                                            support</a></li>
+                                    <li><a href="#"
+                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Help
+                                            center</a></li>
+                                    <li><a href="#"
+                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">System
+                                            status</a></li>
+                                    <li><a href="#"
+                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Feedback</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-wrap gap-4 text-xs text-gray-500 mt-12 justify-start md:justify-end border-t border-white/5 pt-6">
+                            <a href="#" class="hover:text-brand-accent transition-colors">Privacy policy</a>
+                            <span class="hidden md:inline text-white/10">|</span>
+                            <a href="#" class="hover:text-brand-accent transition-colors">Terms and conditions</a>
+                            <span class="hidden md:inline text-white/10">|</span>
+                            <a href="#" class="hover:text-brand-accent transition-colors">Copyright</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute -bottom-1 left-8 md:left-24 z-0 group">
+                <div class="absolute -top-6 left-0 w-6 h-6 bg-transparent rounded-bl-full shadow-[-10px_10px_0_0_#fff]">
+                </div>
+
+                <div
+                    class="bg-white text-brand-dark px-6 py-4 rounded-b-2xl rounded-tr-2xl text-[10px] font-bold shadow-[0_0_20px_rgba(255,255,255,0.2)] transform translate-y-1/2 group-hover:translate-y-0 transition-transform duration-300 cursor-default">
+                    © 2026 Omoway is Proudly Powered by Omotive
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
