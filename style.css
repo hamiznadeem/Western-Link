@@ -1,0 +1,192 @@
+        /* Disable text selection across the whole site */
+        body {
+            cursor: none; 
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10 and Consumer Preview */
+            -moz-user-select: none;
+            /* Firefox */
+            user-select: none;
+            /* Standard syntax */
+        }
+
+          /* Custom Cursor */
+        #cursor {
+            width: 10px; height: 10px;
+            
+            border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 10000;
+        }
+        #cursor-follower {
+            width: 40px; height: 40px;
+            border: 1px solid rgba(96, 165, 250, 0.4);
+            border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999;
+            transition: all .2s ease-out;
+        }
+
+        #nav-links a::after {
+            content: "";
+            width: 100%;
+            height: 2px;
+            border-radius: 20px;
+            position: absolute;
+            left: 0;
+            bottom: 3px;
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: transform .2s linear;
+        }
+
+        #nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        #nav-links a.active::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .rotate-icon {
+                    transform: rotate(90deg);
+                    opacity: 0;
+                }
+
+        /* 3. LOGOS MARQUEE: Animation for scrolling logos endlessly */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+            /* Runs for 30s linearly */
+        }
+
+        /* Pauses the animation when user hovers over it */
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        .animate-marquee-text {
+            display: flex;
+            width: max-content;
+            animation: scroll-text 40s linear infinite;
+        }
+
+        /* 5. SPINNING STAR: Rotates elements (like asterisks) 360 degrees */
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin-slow {
+            animation: spin 8s linear infinite;
+        }
+
+        /* 6. FLOATING EFFECT: Makes the Footer Card float up and down */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            /* Moves up slightly */
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* 7. GLASS SHINE: Adds a moving shine effect over glass cards */
+        @keyframes shine {
+            0% {
+                left: -100%;
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                left: 100%;
+                opacity: 0;
+            }
+        }
+
+        .glass-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-shine::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: skewX(-25deg);
+            animation: shine 8s infinite;
+            pointer-events: none;
+        }
+
+           /* Text Shine Effect */
+        .shine-text {
+            background: linear-gradient(90deg, #fff,#1d7aec, #1d7aec, #569bf0, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 8s linear infinite;
+        }
+        
+          @keyframes shine {
+            to { background-position: -200% center; }
+        }
+
+      
+
+.animate-marquee-text {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    will-change: transform;
+}
+
+
+/* Base Style for Dots */
+    .projectsSwiper .swiper-pagination-bullet {
+        width: 8px;
+        height: 8px;
+        opacity: 1 !important;
+        border-radius: 20px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Active Dot - Stretch effect and Glow */
+    .projectsSwiper .swiper-pagination-bullet-active {
+        width: 20px !important; /* Dot stretch ho jayega */
+        box-shadow: 0 0 15px rgba(0, 154, 250, 0.5); /* Soft Glow effect */
+    }
