@@ -1,3 +1,4 @@
+const body = document.querySelector('body');
 
   let lastScrollTop = 0;
   const header = document.getElementById('main-header');
@@ -15,6 +16,8 @@
     
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Negative scrolling rokne ke liye
   }, false);
+
+
 // Nav Mneu drawerOverlay 
 const menuToggle = document.getElementById('menu-toggle');
 const sideDrawer = document.getElementById('side-drawer');
@@ -29,11 +32,14 @@ menuToggle.addEventListener('click', () => {
         sideDrawer.classList.add('translate-x-full');
         drawerOverlay.classList.remove('opacity-100', 'pointer-events-auto');
         menuIcon.classList.replace('fa-times', 'fa-bars');
+        body.classList.remove('overflow-hidden');
     } else {
         sideDrawer.classList.remove('translate-x-full');
         sideDrawer.classList.add('translate-x-0');
         drawerOverlay.classList.add('opacity-100', 'pointer-events-auto');
         menuIcon.classList.replace('fa-bars', 'fa-times');
+        body.classList.add('overflow-hidden'); 
+        
     }
 });
 
@@ -44,6 +50,209 @@ drawerOverlay.addEventListener('click', () => {
     menuIcon.classList.replace('fa-times', 'fa-bars');
     sideDrawer.classList.remove('translate-x-0');
     sideDrawer.classList.add('translate-x-full');
+    body.classList.remove('overflow-hidden');
+});
+
+const servicesBtn = document.getElementById('mobile-services-btn');
+const servicesMenu = document.getElementById('mobile-services-menu');
+const servicesIcon = document.getElementById('services-icon');
+
+servicesBtn.addEventListener('click', () => {
+    // Check if menu is open
+    const isOpen = servicesMenu.style.maxHeight !== '0px' && servicesMenu.style.maxHeight !== '';
+    
+    if (isOpen) {
+        servicesMenu.style.maxHeight = '0px';
+        servicesIcon.style.transform = 'rotate(0deg)';
+    } else {
+        // scrollHeight se dynamic height calculate karein
+        servicesMenu.style.maxHeight = servicesMenu.scrollHeight + 'px';
+        servicesIcon.style.transform = 'rotate(180deg)';
+    }
+});
+
+
+
+
+
+
+
+let projectsSwiper;
+
+function initSwiper() {
+    if (projectsSwiper) {
+        projectsSwiper.destroy(true, true);
+        projectsSwiper = undefined;
+    }
+
+    const screenWidth = window.innerWidth;
+    
+    if (screenWidth < 1024) {
+        projectsSwiper = new Swiper('.projectsSwiper', {
+            observer: true,
+            observeParents: true,
+            slidesPerView: 1,
+            spaceBetween: 20,
+            centeredSlides: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            on: {
+                init: function() {
+                    updateCircularProgress(this);
+                },
+                slideChange: function() {
+                    updateCircularProgress(this);
+                }
+            }
+        });
+    }
+}
+
+
+
+
+
+function filterProjects(category, btn) {
+    // 1. Button Styling
+    document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('text-brand-light', 'bg-brand-accent/20');
+        b.classList.add('text-brand-light/60');
+    });
+    btn.classList.add('bg-brand-accent/20', 'text-brand-light');
+    btn.classList.remove( 'text-brand-light/60');
+
+    const allSlides = document.querySelectorAll('.project-item');
+    
+    allSlides.forEach(slide => {
+        if (slide.getAttribute('data-category') === category) {
+            slide.classList.remove('hidden');
+            slide.classList.add('swiper-slide');
+            slide.style.display = 'block'; 
+        } else {
+            slide.classList.add('hidden');
+            slide.classList.remove('swiper-slide');
+            slide.style.display = 'none';
+        }
+    });
+
+    setTimeout(() => {
+        initSwiper();
+    }, 50);
+}
+
+// Start-up settings
+window.addEventListener('resize', initSwiper);
+document.addEventListener('DOMContentLoaded', () => {
+    // Default tab trigger
+    const defaultTab = document.querySelector('.tab-btn');
+    if(defaultTab) filterProjects('shopify', defaultTab);
+});
+
+
+
+
+    function updateCircularProgress(swiperInstance) {
+    const circle = document.getElementById('progress-circle');
+    const indexText = document.getElementById('current-index');
+    const totalText = document.getElementById('total-slides');
+    const total = swiperInstance.slides.length;
+    const current = swiperInstance.realIndex + 1;
+    const offset = 283 - (283 * current) / total;
+    
+    if(circle) circle.style.strokeDashoffset = offset;
+    if(indexText) indexText.innerText = current.toString().padStart(2, '0');
+    if(totalText) totalText.innerText = total.toString().padStart(2, '0');
+}
+
+
+
+
+const counters = document.querySelectorAll('.counter');
+const speed = 50;
+
+const startCount = (counter) => {
+    const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const inc = target / speed;
+
+        if (count < target) {
+            counter.innerText = Math.ceil(count + inc);
+            setTimeout(updateCount, 15);
+        } else {
+            counter.innerText = target;
+        }
+    };
+    updateCount();
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting) {
+            startCount(entry.target);
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+counters.forEach(counter => observer.observe(counter));
+
+
+
+
+
+gsap.registerPlugin(Draggable);
+
+function setupOrbit(elementId, autoSpeed) {
+    const orbit = document.getElementById(elementId);
+    if (!orbit) return;
+
+    const items = orbit.querySelectorAll('.skill-box');
+
+    let orbitData = {
+        rotation: 0,
+        isDragging: false
+    };
+
+    // AUTO ROTATE
+    gsap.ticker.add(() => {
+        if (!orbitData.isDragging) {
+            orbitData.rotation += autoSpeed;
+
+            gsap.set(orbit, { rotation: orbitData.rotation });
+            gsap.set(items, { rotation: -orbitData.rotation });
+        }
+    });
+
+    Draggable.create(orbit, {
+        type: "rotation",
+
+        trigger: items, 
+
+        onPress() {
+            orbitData.isDragging = true;
+        },
+
+        onDrag() {
+            orbitData.rotation = this.rotation;
+            gsap.set(items, { rotation: -this.rotation });
+        },
+
+        onRelease() {
+            orbitData.rotation = this.rotation;
+            orbitData.isDragging = false;
+        }
+    });
+}
+
+setupOrbit("inner-orbit", 0.3);
+setupOrbit("outer-orbit", 0.2);
+
+window.addEventListener("load", () => {
+   setupOrbit("inner-orbit", 0.3);
+   setupOrbit("outer-orbit", 0.2);
 });
 
 
@@ -75,7 +284,6 @@ function toggleFaq(element) {
 
 
 // --- Custom Cursor ---
-const body = document.querySelector('body');
 const cursor = document.getElementById('cursor');
 const follower = document.getElementById('cursor-follower');
 
@@ -84,17 +292,18 @@ window.addEventListener('mousemove', (e) => {
     gsap.to(follower, { x: e.clientX - 20, y: e.clientY - 20, duration: 0.5 });
 });
 
-
 // Expand cursor on interactive
-document.querySelectorAll('a, button, h1, h2, h3, h4, h5, h6, span, i').forEach(el => {
+document.querySelectorAll('a, button, h1, h2, h3, h4, h5, h6, span, i,img').forEach(el => {
     el.addEventListener('mouseenter', () => {
-        gsap.to(follower, { scale: 1.8, borderColor: '#60a5fa' });
+        gsap.to(follower, { scale: 1.8});
         gsap.to(cursor, { scale: 0.5 });
+        // follower.classList.add("bg-brand-accent/10")
         follower.classList.remove("bg-brand-accent")
     });
     el.addEventListener('mouseleave', () => {
-        gsap.to(follower, { scale: 1, borderColor: 'rgba(96,165,250,0.4)' });
+        gsap.to(follower, { scale: 1 });
         gsap.to(cursor, { scale: 1 });
+        // follower.classList.remove("border-brand-primary")
         follower.classList.add("bg-brand-accent")
     });
 
@@ -136,39 +345,47 @@ if (marquee) {
 
 }
 
-    let swiper;
-
-    function initSwiper() {
-        const screenWidth = window.innerWidth;
-
-        // Agar screen 1024px se choti hai (Mobile/Tablet) aur swiper nahi bana
-        if (screenWidth < 1024) {
-            if (!swiper) {
-                swiper = new Swiper('.projectsSwiper', {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                    grabCursor: true,
-                    loop: true,
-                    autoplay: {
-                        delay: 3500,
-                        disableOnInteraction: false,
-                    },
-                    pagination: {
-                        el: ".swiper-pagination",
-                        clickable: true,
-                    },
-                    breakpoints: {
-                        768: { slidesPerView: 2 }
-                    }
-                });
+    document.addEventListener("DOMContentLoaded", function() {
+        
+        // --- Initialize Swiper ---
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: "auto",
+            centeredSlides: true,  // <--- IMPORTANT: Ye active card ko center karega
+                    initialSlide: 2,
+            spaceBetween: 10,
+            freeMode: true,
+            mousewheel: {
+            enable: true,      
+            forceToAxis: true,
+            },
+            keyboard :{
+                enable: true,
+            },
+            breakpoints: {
+                768: {
+                    centeredSlides: false,
+                    initialSlide: 0,
+                    spaceBetween: 30
+                }
             }
-        } 
-        // Agar screen 1024px ya usse bari hai aur swiper chal raha hai
-        else if (swiper) {
-            swiper.destroy(true, true);
-            swiper = undefined;
-        }
-    }
+        });
+
+        // --- Initialize GSAP ---
+        // Register Plugin
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animation 1: Header Text Fade Up
+        gsap.from(".section-header", {
+            scrollTrigger: {
+                trigger: ".why-section",
+                start: "top 80%", // Jab section screen ke 80% par aaye
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        });
+    });
 
 
     

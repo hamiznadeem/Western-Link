@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <script>
         tailwind.config = {
             theme: {
@@ -39,36 +38,174 @@
                         // Ye sirf 750px aur 950px ke darmiyan apply hoga
                         'tb': { 'min': '756px', 'max': '968px' },
                     },
+                    
                 },
             },
         }
     </script>
 
+<style>
+        /* Pagination Container Placement */
+.swiper-pagination {
+    bottom: -20px !important; /* Slider se thoda niche */
+}
+
+/* Base Bullet Style (Inactive) */
+.swiper-pagination-bullet {
+    width: 4px !important;
+    height: 4px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    opacity: 1 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    border-radius: 50% !important;
+}
+
+.swiper-pagination-bullet-active {
+    width: 25px !important;
+    border-radius: 20px !important;
+    background: #60a5fa !important;
+    box-shadow: 0 0 15px #60a5fa;
+    border-color: #60a5fa !important;
+}
+</style>
+
 </head>
 
 <body
-    class="text-brand-light bg-brand-dark font-sans antialiased selection:bg-brand-accent selection:text-brand-primary overflow-x-hidden">
+    class=" text-brand-light bg-brand-dark font-sans antialiased selection:bg-brand-accent selection:text-brand-primary overflow-x-hidden ">
     <div id="cursor" class="hidden md:block bg-brand-light"></div>
-    <div id="cursor-follower" class="hidden md:block bg-brand-accent"></div>
-    <header class="fixed w-full z-[49] py-6 px-4 tb:px-2 md:px-8 transition-all duration-300" id="main-header">
+    <div id="cursor-follower" class="hidden md:block bg-brand-accent border border-1.5 border-brand-accent"></div>
+    <header class="fixed w-full z-[49] pt-6 px-4 tb:px-2 md:px-8 transition-all duration-300" id="main-header">
         <nav class="max-w-7xl mx-auto flex items-center justify-between relative">
 
             <div
-                class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-full pl-4 md:pl-5 pr-5 md:pr-7 py-1 shadow-glass hover:bg-white/10 transition-all cursor-pointer z-50">
+                class="bg-brand-light/5 backdrop-blur-xl border border-white/10 rounded-full pl-4 md:pl-5 pr-5 md:px-7 py-2.5 shadow-glass hover:bg-white/10 transition-all cursor-pointer z-50">
                 <a href="#" class="flex items-center justify-center tb:text-sm md:text-md font-bold tracking-tight text-white">
-                    <img src="logo-white.png" alt="Hexsolz Logo" class="w-10 h-10 mb-1">
+                    <img src="logo-white.png" alt="Hexsolz Logo" class="w-6 h-6 mb-1 mr-1">
                     <span>HEX</span>
                     <span class="text-brand-accent">SOLZ</span>
                 </a>
             </div>
 
             <div id="nav-links"
-                class="hidden md:flex  bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-10 py-2 shadow-glass mx-4">
+                class="hidden md:flex bg-brand-light/5 backdrop-blur-xl border border-white/10 rounded-full px-10 py-2 shadow-glass mx-4">
                 <div class="flex items-center space-x-10 tb:text-xs md:text-sm font-medium text-gray-300">
                     <a href="#"
                         class="relative active py-2 px-1 text-brand-accent after:bg-brand-accent transition-all">Home</a>
-                    <a href="#"
-                        class="relative py-2 px-1 after:bg-brand-accent hover:text-brand-accent hover:-translate-y-1 transition-all">Services</a>
+                    <div class="group">
+                        <a href="#" class="relative py-2 px-1 flex items-center gap-2 hover:text-brand-accent transition-all duration-300">
+                            Services
+                            <i class="fas fa-chevron-down text-[9px] group-hover:rotate-180 transition-transform duration-300"></i>
+                        </a>
+
+                        <div
+                            class="fixed bg-brand-dark/95 backdrop-blur-xl w-[80vw] lg:w-[75vw] xl:w-[65vw] border border-brand-accent/20 rounded-[2rem] p-8 shadow-glass mt-4 left-1/2 -translate-x-1/2 top-full  opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-4 group-hover:translate-y-0 transition-all duration-300 ease-out ">
+                            
+                                <div class="grid grid-cols-3 gap-8">
+
+                                    <div>
+                                        <h3 class="text-brand-accent text-xs pl-4 uppercase tracking-widest font-bold mb-4 ml-2">Development</h3>
+                                        <div>
+                                            <a href="#"
+                                                class="flex items-start gap-4 p-3 rounded-2xl hover:bg-brand-secondary/10 transition-colors group/item">
+                                                <div
+                                                    class="w-10 h-10 bg-brand-secondary/10 rounded-xl flex items-center justify-center text-brand-secondary group-hover/item:bg-brand-secondary group-hover/item:text-white transition-all">
+                                                    <i class="fas fa-code"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="text-brand-light text-xs xl:text-sm font-bold">Web Development</p>
+                                                    <p class="text-brand-light/70 text-[9px] xl:text-[11px]">Custom websites & Apps</p>
+                                                </div>
+                                            </a>
+                                            <a href="#"
+                                                class="flex items-start gap-4 p-3 rounded-2xl hover:bg-brand-secondary/10 transition-colors group/item">
+                                                <div
+                                                    class="w-10 h-10 bg-brand-secondary/10 rounded-xl flex items-center justify-center text-brand-secondary group-hover/item:bg-brand-secondary group-hover/item:text-white transition-all">
+                                                    <i class="fab fa-shopify"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="text-brand-light text-xs lg:text-sm font-bold">Shopify Stores</p>
+                                                    <p class="text-brand-light/70 text-[9px] xl:text-[11px]">E-commerce solutions</p>
+                                                </div>
+                                            </a>
+                                            <a href="#"
+                                                class="flex items-start gap-4 p-3 rounded-2xl hover:bg-brand-secondary/10 transition-colors group/item">
+                                                <div
+                                                    class="w-10 h-10 bg-brand-secondary/10 rounded-xl flex items-center justify-center text-brand-secondary group-hover/item:bg-brand-secondary group-hover/item:text-white transition-all">
+                                                    <i class="fab fa-wordpress"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="text-brand-light text-xs lg:text-sm font-bold">Wordpress</p>
+                                                    <p class="text-brand-light/70 text-[9px] xl:text-[11px]">CMS solutions</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-brand-secondary text-xs pl-4 uppercase tracking-widest font-bold mb-4 ml-2">Growth</h3>
+                                        <div class="space-y-2">
+                                            <a href="#"
+                                                class="flex items-start gap-4 p-3 rounded-2xl hover:bg-brand-accent/10 transition-colors group/item">
+                                                <div
+                                                    class="w-10 h-10 bg-brand-secondary/10 rounded-xl flex items-center justify-center text-brand-secondary group-hover/item:bg-brand-secondary group-hover/item:text-white transition-all">
+                                                    <i class="fas fa-chart-line"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="text-brand-light text-xs lg:text-sm font-bold">SEO Optimization</p>
+                                                    <p class="text-brand-light/70 text-[9px] xl:text-[11px]">Rank on first page</p>
+                                                </div>
+                                            </a>
+                                            <a href="#"
+                                                class="flex items-start gap-4 p-3 rounded-2xl hover:bg-brand-accent/10 transition-colors group/item">
+                                                <div
+                                                    class="w-10 h-10 bg-brand-secondary/10 rounded-xl flex items-center justify-center text-brand-secondary group-hover/item:bg-brand-secondary group-hover/item:text-white transition-all">
+                                                    <i class="fas fa-pen-nib"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="text-brand-light text-xs lg:text-sm font-bold">Digital Marketing</p>
+                                                    <p class="text-brand-light/70 text-[9px] xl:text-[11px]">Modern & Clean layouts</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-brand-accent text-xs pl-4 uppercase tracking-widest font-bold mb-4 ml-2">AI Automation</h3>
+                                        <div class="space-y-2">
+                                            <a href="#"
+                                                class="flex items-start gap-4 p-3 rounded-2xl hover:bg-brand-secondary/10 transition-colors group/item">
+                                                <div
+                                                    class="w-10 h-10 bg-brand-secondary/10 rounded-xl flex items-center justify-center text-brand-secondary group-hover/item:bg-brand-secondary group-hover/item:text-white transition-all">
+                                                    <i class="fas fa-code"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="text-brand-light text-xs lg:text-sm font-bold">Web Development</p>
+                                                    <p class="text-brand-light/70 text-[9px] xl:text-[11px]">Custom websites & Apps</p>
+                                                </div>
+                                            </a>
+                                            <a href="#"
+                                                class="flex items-start gap-4 p-3 rounded-2xl hover:bg-brand-secondary/10 transition-colors group/item">
+                                                <div
+                                                    class="w-10 h-10 bg-brand-secondary/10 rounded-xl flex items-center justify-center text-brand-secondary group-hover/item:bg-brand-secondary group-hover/item:text-white transition-all">
+                                                    <i class="fab fa-shopify"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="text-brand-light text-xs lg:text-sm font-bold">Shopify Stores</p>
+                                                    <p class="text-brand-light/70 text-[9px] xl:text-[11px]">E-commerce solutions</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                        
+                                </div>
+
+                                <div class="mt-6 pt-6 px-2 border-t border-brand-light/10 flex items-center justify-between">
+                                    <p class="text-gray-400 text-xs">Ready to start your project?</p>
+                                    <a href="#" class="text-brand-accent text-xs font-bold hover:underline">Let's Talk →</a>
+                                </div>
+                            
+                        </div>
+                    </div>
                     <a href="#"
                         class="relative py-2 px-1 after:bg-brand-accent hover:text-brand-accent hover:-translate-y-1 transition-all">Our
                         Work</a>
@@ -82,7 +219,7 @@
 
             <div class="flex items-center gap-3">
                 <a href="#"
-                    class="group hidden sm:flex items-center text-sm tb:text-xs md:text-sm space-x-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2.5 text-xs font-medium transition-all text-gray-300 shadow-glass hover:bg-white/10 hover:border-white/20">
+                    class="group hidden sm:flex items-center text-sm tb:text-xs md:text-sm space-x-2 bg-brand-light/5 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2.5 text-xs font-medium transition-all text-gray-300 shadow-glass hover:bg-white/10 hover:border-white/20">
                     <span
                         class="flex items-center justify-center text-gray-300 group-hover:text-green-400 transition-all">
                         <i
@@ -99,37 +236,96 @@
             </div>
 
             <div id="side-drawer"
-                class="fixed top-0 right-0 h-screen w-[280px] bg-brand-dark/5 backdrop-blur-2xl border-l border-white/10 z-40 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col p-8 pt-24 shadow-2xl">
-                <div class="flex flex-col space-y-6 text-lg font-medium text-gray-300">
-                    <a href="#" class="text-brand-accent border-b border-white/5 pb-2">Home</a>
-                    <a href="#" class="hover:text-brand-accent transition-all border-b border-white/5 pb-2">Services</a>
-                    <a href="#" class="hover:text-brand-accent transition-all border-b border-white/5 pb-2">Our
+                class="fixed top-0 right-0 h-screen w-[280px] bg-brand-dark/5 backdrop-blur-2xl border-l border-brand-accent/10 rounded-[2rem] z-40 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col p-8 pt-24 shadow-2xl overflow-y-auto overflow-x-hidden scroll-smooth">
+                <div class="flex flex-col space-y-4 text-md font-medium text-brand-light">
+                    <a href="#" class="text-brand-accent border-b border-brand-light/5 pb-2">Home</a>
+                    <div class="flex flex-col border-b border-brand-light/5">
+                        <button id="mobile-services-btn"
+                            class="flex items-center justify-between w-full text-left py-2 hover:text-brand-accent transition-all ">
+                            <span>Services</span>
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-300" id="services-icon"></i>
+                        </button>
+            
+                        <div id="mobile-services-menu" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out pl-4">
+                            <div class="flex flex-col space-y-4 py-4">
+                                <a href="#" class="flex items-center gap-3 group">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-brand-accent/10 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all">
+                                        <i class="fas fa-code text-xs"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-400 group-hover:text-white transition-colors">Web
+                                        Development</span>
+                                </a>
+                                <a href="#" class="flex items-center gap-3 group">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-brand-accent/10 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all">
+                                        <i class="fab fa-shopify text-xs"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-400 group-hover:text-white transition-colors">Shopify
+                                        Stores</span>
+                                </a>
+                                <a href="#" class="flex items-center gap-3 group">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-brand-secondary/10 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white transition-all">
+                                        <i class="fas fa-rocket text-xs"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-400 group-hover:text-white transition-colors">SEO &
+                                        Marketing</span>
+                                </a>
+                                <a href="#" class="flex items-center gap-3 group">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-brand-secondary/10 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white transition-all">
+                                        <i class="fas fa-pen-nib text-xs"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-400 group-hover:text-white transition-colors">UI/UX Design</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="hover:text-brand-accent transition-all border-b border-brand-light/5 pb-2">Our
                         Work</a>
-                    <a href="#" class="hover:text-brand-accent transition-all border-b border-white/5 pb-2">Reviews</a>
-                    <a href="#" class="hover:text-brand-accent transition-all border-b border-white/5 pb-2">Contact
+                    <a href="#" class="hover:text-brand-accent transition-all border-b border-brand-light/5 pb-2">Reviews</a>
+                    <a href="#" class="hover:text-brand-accent transition-all border-b border-brand-light/5 pb-2">Contact
                         us</a>
                 </div>
-
-                <div class="pt-10 flex flex-col gap-5">
+            
+                <div class="pt-10 flex flex-col gap-3">
                     <a href="#"
                         class="group flex sm:hidden items-center space-x-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2.5 text-xs font-medium transition-all text-gray-300 shadow-glass hover:bg-white/10 hover:border-white/20">
-                        <span
-                            class="flex items-center justify-center text-gray-300 group-hover:text-green-400 transition-all">
+                        <span class="flex items-center justify-center text-gray-300 group-hover:text-green-400 transition-all">
                             <i class="fab fa-whatsapp text-xl group-hover:scale-110 transition-transform"></i>
                         </span>
                         <span class="text-gray-600 px-1">•</span>
                         <span class="text-gray-400 group-hover:text-white">it's Free</span>
                     </a>
-                    <a href="#"
-                        class="flex items-center justify-center space-x-2  text-white rounded-full px-8 py-4  transition-all transform w-full sm:w-auto min-w-[190px]">
-                        <span class="text-sm sm:text-md font-semibold">Get A Quote</span>
-                        <i class="fas fa-arrow-right ml-2 text-sm sm:text-md"></i>
-                    </a>
+                    <div id="social-div" class=" flex flex-col items-center group">
+                        <div class=" px-2 py-2  rounded-full flex gap-1 duration-300">
+                            <a href="#"
+                                class="w-10 h-10 bg-brand-accent/5 rounded-full text-brand-light flex items-center justify-center hover:bg-brand-accent/10 backdrop-blur-lg hover:text-brand-accent hover:rotate-12 transition-all duration-300">
+                                <i class=" fas fa-globe"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 bg-brand-accent/5 rounded-full text-brand-light flex items-center justify-center hover:bg-brand-accent/10 backdrop-blur-lg hover:text-brand-accent hover:-rotate-12 transition-all duration-300">
+                                <i class=" fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 bg-brand-accent/5 rounded-full text-brand-light flex items-center justify-center hover:bg-brand-accent/10 backdrop-blur-lg hover:text-brand-accent hover:rotate-12 transition-all duration-300">
+                                <i class=" fab fa-twitter"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 bg-brand-accent/5 rounded-full text-brand-light flex items-center justify-center hover:bg-brand-accent/10 backdrop-blur-lg hover:text-brand-accent hover:-rotate-12 transition-all duration-300">
+                                <i class=" fab fa-instagram"></i>
+                            </a>
+                        </div>
+            
+                    </div>
+            
                 </div>
             </div>
+            
 
             <div id="drawer-overlay"
-                class="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 opacity-0 pointer-events-none transition-opacity duration-500">
+                class="fixed h-[100vh] inset-0 bg-brand-accent/5 backdrop-blur-sm z-30 pointer-events-none opacity-0 transition-opacity duration-500">
             </div>
 
         </nav>
@@ -190,33 +386,34 @@
             <div
                 class="animate-marquee flex items-center gap-12 md:gap-24 opacity-70 hover:opacity-100  transition-all duration-300">
                 <div class="flex items-center gap-12 md:gap-24">
-                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
-                            class="fas fa-signature"></i> Sign</div>
-                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
-                            class="fas fa-infinity"></i> maze</div>
-                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
-                            class="fas fa-copyright"></i> Culture Amp</div>
-                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
-                            class="fab fa-y-combinator"></i> HELLOSIGN</div>
-                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
-                            class="fas fa-bolt"></i> TechFlow</div>
-                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
-                            class="fas fa-microchip"></i> Zenith</div>
+                    <div class="text-[1.5rem] font-bold text-light flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-signature"></i> <span>Sign</span></div>
+                    <div class="text-[1.5rem] font-bold text-light flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-infinity"></i> <span>maze</span></div>
+                    <div class="text-[1.5rem] font-bold text-light flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-copyright"></i> <span>Culture Amp</span></div>
+                    <div class="text-[1.5rem] font-bold text-light flex items-center gap-3 whitespace-nowrap"><i
+                            class="fab fa-y-combinator"></i> <span>HELLOSIGN</span></div>
+                    <div class="text-[1.5rem] font-bold text-light flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-bolt"></i> <span>TechFlow</span></div>
+                    <div class="text-[1.5rem] font-bold text-light flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-microchip"></i> <span>Zenith</span></div>
                 </div>
                 <div class="flex items-center gap-12 md:gap-24">
-                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
-                            class="fas fa-signature"></i> Sign</div>
-                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
-                            class="fas fa-infinity"></i> maze</div>
-                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
-                            class="fas fa-copyright"></i> Culture Amp</div>
-                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
-                            class="fab fa-y-combinator"></i> HELLOSIGN</div>
-                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
-                            class="fas fa-bolt"></i> TechFlow</div>
-                    <div class="text-2xl font-bold text-white flex items-center gap-3 whitespace-nowrap"><i
-                            class="fas fa-microchip"></i> Zenith</div>
+                    <div class="text-[1.5rem] font-bold text-light flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-signature"></i> <span>Sign</span></div>
+                    <div class="text-[1.5rem] font-bold text-light flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-infinity"></i> <span>maze</span></div>
+                    <div class="text-[1.5rem] font-bold text-light flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-copyright"></i> <span>Culture Amp</span></div>
+                    <div class="text-[1.5rem] font-bold text-light flex items-center gap-3 whitespace-nowrap"><i
+                            class="fab fa-y-combinator"></i> <span>HELLOSIGN</span></div>
+                    <div class="text-[1.5rem] font-bold text-light flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-bolt"></i> <span>TechFlow</span></div>
+                    <div class="text-[1.5rem] font-bold text-light flex items-center gap-3 whitespace-nowrap"><i
+                            class="fas fa-microchip"></i> <span>Zenith</span></div>
                 </div>
+                
             </div>
         </div>
 
@@ -286,25 +483,21 @@
 
                 <div class="relative h-[400px] w-full flex items-center justify-center">
 
-                    <div
-                        class="relative z-30 w-24 h-24 bg-white/10 backdrop-blur-3xl border border-white/20 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(144,221,240,0.2)]">
-                        <div class="text-center">
-                            <i class="fas fa-shield-halved text-brand-accent text-2xl"></i>
-                            <p class="text-[7px] text-white/70 font-bold uppercase tracking-tighter mt-1">Agency Hub</p>
+                    <div class="relative z-30 w-24 h-24 bg-white/10 backdrop-blur-3xl border border-white/20 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(144,221,240,0.2)]">
+                        <div class="flex flex-col items-center justify-center ">
+                            <img src="logo-white.png" alt="logo HEXSOLZ" class="w-6 w-6">
+                            <p class="text-[10px] text-brand-light font-bold uppercase tracking-tighter mt-1">HEX<span class="text-brand-accent">SOLZ</span></p>
                         </div>
                     </div>
 
-                    <div
-                        class="absolute w-[210px] h-[210px] border border-white/15 rounded-full animate-[spin_20s_linear_infinite]">
-                        <div
-                            class="absolute -top-6 left-1/2 -translate-x-1/2 p-3 bg-brand-dark border border-white/10 rounded-xl shadow-xl hover:border-brand-accent transition-colors">
+                    <div id="inner-orbit" class="z-30 absolute w-[210px] h-[210px] border border-white/15 rounded-full ">
+                        <div class="skill-box absolute -top-6 left-1/2 -translate-x-1/2 p-3 bg-brand-dark border border-white/10 rounded-xl shadow-xl hover:border-brand-accent transition-colors">
                             <div class="flex flex-col items-center">
                                 <i class="fas fa-shopping-cart text-brand-accent text-sm"></i>
                                 <span class="text-[8px] text-white mt-1 font-bold">E-COM</span>
                             </div>
                         </div>
-                        <div
-                            class="absolute -bottom-6 left-1/2 -translate-x-1/2 p-3 bg-brand-dark border border-white/10 rounded-xl shadow-xl hover:border-brand-accent transition-colors">
+                        <div class="skill-box absolute -bottom-6 left-1/2 -translate-x-1/2 p-3 bg-brand-dark border border-white/10 rounded-xl shadow-xl hover:border-brand-accent transition-colors">
                             <div class="flex flex-col items-center">
                                 <i class="fas fa-tasks text-brand-accent text-sm"></i>
                                 <span class="text-[8px] text-white mt-1 font-bold">CMS</span>
@@ -312,18 +505,33 @@
                         </div>
                     </div>
 
-                    <div
-                        class="absolute w-[330px] md:w-[340px] h-[350px] md:h-[350px] border border-dashed border-white/10 rounded-full animate-[spin_30s_linear_infinite_reverse]">
+                    <div id="outer-orbit"
+                        class="absolute w-[330px] md:w-[340px] h-[350px] md:h-[350px] border border-dashed border-white/10 rounded-full ">
+                    
                         <div
-                            class="absolute top-1/2 -left-6 -translate-y-1/2 p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl flex flex-col items-center shadow-xl">
+                            class="skill-box absolute top-1/2 -left-6 -translate-y-1/2 p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl flex flex-col items-center shadow-xl">
                             <i class="fas fa-arrow-trend-up text-brand-secondary text-lg"></i>
-                            <span class="text-[7px] text-white/40 mt-1 font-bold tracking-widest">SEO</span>
+                            <span class="text-[7px] text-white mt-1 font-bold tracking-widest">SEO</span>
                         </div>
+                    
                         <div
-                            class="absolute top-1/2 -right-6 -translate-y-1/2 p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl flex flex-col items-center shadow-xl">
+                            class="skill-box absolute top-1/2 -right-6 -translate-y-1/2 p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl flex flex-col items-center shadow-xl">
                             <i class="fas fa-code text-brand-secondary text-lg"></i>
-                            <span class="text-[7px] text-white/40 mt-1 font-bold tracking-widest">DEV</span>
+                            <span class="text-[7px] text-white mt-1 font-bold tracking-widest">DEV</span>
                         </div>
+                    
+                        <div
+                            class="skill-box absolute -top-6 left-1/2 -translate-x-1/2 p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl flex flex-col items-center shadow-xl">
+                            <i class="fas fa-microchip text-brand-secondary text-lg"></i>
+                            <span class="text-[7px] text-white mt-1 font-bold tracking-widest">IA</span>
+                        </div>
+                    
+                        <div
+                            class="skill-box absolute -bottom-6 left-1/2 -translate-x-1/2 p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl flex flex-col items-center shadow-xl">
+                            <i class="fas fa-cash-register text-brand-secondary text-lg"></i>
+                            <span class="text-[7px] text-white mt-1 font-bold tracking-widest">POS</span>
+                        </div>
+                    
                     </div>
 
                 </div>
@@ -333,8 +541,8 @@
 
                 <div class="flex flex-col items-center group transition-all duration-300">
                     <div class="flex items-baseline">
-                        <span
-                            class="text-2xl md:text-3xl font-bold text-white group-hover:text-brand-accent transition-colors">250</span>
+                        <span data-target="250"
+                            class="counter text-2xl md:text-3xl font-bold text-white group-hover:text-brand-accent transition-colors">0</span>
                         <span class="text-brand-accent group-hover:text-brand-light font-bold ml-0.5 text-lg">+</span>
                     </div>
                     <p
@@ -345,8 +553,8 @@
 
                 <div class="flex flex-col items-center group transition-all duration-300">
                     <div class="flex items-baseline">
-                        <span
-                            class="text-2xl md:text-3xl font-bold text-white group-hover:text-brand-accent transition-colors">98</span>
+                        <span data-target="98"
+                            class="counter text-2xl md:text-3xl font-bold text-white group-hover:text-brand-accent transition-colors">0</span>
                         <span class="text-brand-accent group-hover:text-white font-bold ml-0.5 text-lg">%</span>
                     </div>
                     <p
@@ -357,8 +565,8 @@
 
                 <div class="flex flex-col items-center group transition-all duration-300">
                     <div class="flex items-baseline">
-                        <span
-                            class="text-2xl md:text-3xl font-bold text-white group-hover:text-brand-accent transition-colors">6</span>
+                        <span data-target="6"
+                            class="counter text-2xl md:text-3xl font-bold text-white group-hover:text-brand-accent transition-colors">0</span>
                         <span class="text-brand-accent group-hover:text-white font-bold ml-0.5 text-lg">Y+</span>
                     </div>
                     <p
@@ -479,273 +687,414 @@
 
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="why-section w-full bg-brand-dark py-9 px-4 md:px-8 relative overflow-hidden">
-        <div
-            class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-brand-primary/20 rounded-full blur-[120px] pointer-events-none">
+    <!-- why Choose us  -->
+    <section class="why-section w-full bg-brand-dark py-9 px-4 md:px-0 relative overflow-hidden">
+    <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-brand-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+
+        <div class="mb-14 text-center section-header">
+            <div class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6 backdrop-blur-md">
+                <div class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></div>
+                <span class="text-brand-accent text-xs font-bold uppercase tracking-wider">Why Choose Us</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight max-w-3xl mx-auto">
+                <span>Expertise that drives</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-secondary">your digital success.</span>
+            </h2>
         </div>
 
-        <div class="max-w-7xl mx-auto relative z-10">
+        <div class="swiper mySwiper overflow-visible !pb-12">
+            <div class="swiper-wrapper">
 
-            <div class="mb-14 text-center">
-                <div
-                    class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6 backdrop-blur-md">
-                    <div class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></div>
-                    <span class="text-brand-accent text-xs font-bold uppercase tracking-wider">Why Choose Us</span>
-                </div>
-                <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight max-w-3xl mx-auto">
-                    <span>Expertise that drives</span> <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-secondary">your
-                        digital success.</span>
-                </h2>
-            </div>
-
-            <div class="flex flex-wrap justify-center gap-8">
-                <div
-                    class="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/10 hover:border-brand-accent/30 transition-all duration-500 overflow-hidden shadow-2xl w-full tb:w-[calc(50%-2rem)] md:w-[calc(33.33%-2rem)] max-w-[450px]">
-                    <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
-                    <div class="relative h-56 w-full mb-6 flex flex-col items-center justify-center">
-                        <div class="flex gap-3 mb-4 translate-x-4">
-                            <div
-                                class="w-10 h-10 rounded-full bg-brand-dark/60 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg transform -translate-y-2">
-                                <i class="fab fa-shopify text-brand-accent text-sm"></i>
+                <div class="swiper-slide h-auto w-[85%] max-w-[350px]">
+                    <div class="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/10 hover:border-brand-accent/30 transition-all duration-500 overflow-hidden shadow-2xl h-full">
+                        <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
+                        <div class="relative h-56 w-full mb-6 flex flex-col items-center justify-center">
+                            <div class="flex gap-3 mb-4 translate-x-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-dark/60 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg transform -translate-y-2">
+                                    <i class="fab fa-shopify text-brand-accent text-sm"></i>
+                                </div>
+                                <div class="w-12 h-12 rounded-xl bg-brand-dark border border-white/10 flex items-center justify-center shadow-2xl z-10">
+                                    <i class="fab fa-wordpress text-2xl text-brand-accent"></i>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-brand-dark/60 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-code text-brand-accent text-xs"></i>
+                                </div>
                             </div>
-                            <div
-                                class="w-12 h-12 rounded-xl bg-brand-dark border border-white/10 flex items-center justify-center shadow-2xl z-10">
-                                <i class="fab fa-wordpress text-2xl text-brand-accent"></i>
-                            </div>
-                            <div
-                                class="w-10 h-10 rounded-full bg-brand-dark/60 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg">
-                                <i class="fas fa-code text-brand-accent text-xs"></i>
+                            <div class="w-24 h-24 rounded-2xl bg-brand-accent/10 border border-white/10 flex items-center justify-center overflow-hidden relative shadow-2xl backdrop-blur-sm transition-transform duration-500">
+                                <i class="fa-regular fa-circle-check text-4xl text-brand-light"></i>
+                                <div class="absolute inset-0 bg-brand-accent/20 blur-xl"></div>
                             </div>
                         </div>
-                        <div
-                            class="w-24 h-24 rounded-2xl bg-brand-accent/10 border border-white/10 flex items-center justify-center overflow-hidden relative shadow-2xl backdrop-blur-sm transition-transform duration-500">
-                            <i class="fa-regular fa-circle-check text-4xl text-brand-light"></i>
-                            <div class="absolute inset-0 bg-brand-accent/20 blur-xl"></div>
+                        <div class="relative z-10 text-center">
+                            <h3 class="text-xl font-bold text-white mb-2">Proven Track Record</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                With 6+ years of experience, we’ve mastered the art of building high-performance Shopify & WordPress sites.
+                            </p>
                         </div>
-                    </div>
-                    <div class="relative z-10 text-center">
-                        <h3 class="text-xl font-bold text-white mb-2">Proven Track Record</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            With 6+ years of experience, we’ve mastered the art of building high-performance Shopify &
-                            WordPress sites.
-                        </p>
                     </div>
                 </div>
 
-                <div
-                    class="card group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/10 hover:border-brand-accent/30 transition-all duration-500 overflow-hidden shadow-2xl w-full tb:w-[calc(50%-2rem)] md:w-[calc(33.33%-2rem)] max-w-[450px]">
-                    <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
-                    <div class="relative h-56 w-full mb-6 flex items-center justify-center">
-                        <div class="relative w-full h-full max-h-40 max-w-[200px]">
-                            <div
-                                class="absolute -top-6 -right-4 bg-brand-dark/80 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full flex items-center gap-2 shadow-xl z-20 animate-bounce">
-                                <i class="fas fa-arrow-up text-brand-accent text-xs"></i>
-                                <span class="text-xs font-bold text-white">75% Faster</span>
-                            </div>
-                            <svg class="absolute inset-0 w-full h-full overflow-visible z-0" viewBox="0 0 200 100">
-                                <path d="M20,80 Q60,80 80,50 T160,20" fill="none" stroke="rgba(255,255,255,0.1)"
-                                    stroke-width="2" stroke-dasharray="4 4" />
-                                <path d="M20,80 Q60,80 80,50" fill="none" stroke="#2C666E" stroke-width="2" />
-                                <path d="M80,50 T160,20" fill="none" stroke="#90DDF0" stroke-width="2" />
-                            </svg>
-                            <div
-                                class="absolute top-[20%] right-[20%] w-4 h-4 bg-brand-accent rounded-full border-4 border-brand-dark z-10 group-hover:scale-125 transition-transform">
-                            </div>
-                            <div class="absolute top-[25%] right-[18%] z-20 drop-shadow-lg">
-                                <i class="fas fa-rocket text-white text-lg"></i>
+                <div class="swiper-slide h-auto w-[85%] max-w-[350px]">
+                    <div class="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/10 hover:border-brand-accent/30 transition-all duration-500 overflow-hidden shadow-2xl h-full">
+                        <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
+                        <div class="relative h-56 w-full mb-6 flex items-center justify-center">
+                            <div class="relative w-full h-full max-h-40 max-w-[200px]">
+                                <div class="absolute -top-6 -right-4 bg-brand-dark/80 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full flex items-center gap-2 shadow-xl z-20 animate-bounce">
+                                    <i class="fas fa-arrow-up text-brand-accent text-xs"></i>
+                                    <span class="text-xs font-bold text-white">75% Faster</span>
+                                </div>
+                                <svg class="absolute inset-0 w-full h-full overflow-visible z-0" viewBox="0 0 200 100">
+                                    <path d="M20,80 Q60,80 80,50 T160,20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" stroke-dasharray="4 4" />
+                                    <path d="M20,80 Q60,80 80,50" fill="none" stroke="#2C666E" stroke-width="2" />
+                                    <path d="M80,50 T160,20" fill="none" stroke="#90DDF0" stroke-width="2" />
+                                </svg>
+                                <div class="absolute top-[20%] right-[20%] w-4 h-4 bg-brand-accent rounded-full border-4 border-brand-dark z-10 group-hover:scale-125 transition-transform"></div>
+                                <div class="absolute top-[25%] right-[18%] z-20 drop-shadow-lg">
+                                    <i class="fas fa-rocket text-white text-lg"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="relative z-10 text-center">
-                        <h3 class="text-xl font-bold text-white mb-2">SEO Optimized Growth</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            We don't just build websites; we rank them. Our SEO-first approach ensures your business
-                            gets the visibility it deserves.
-                        </p>
+                        <div class="relative z-10 text-center">
+                            <h3 class="text-xl font-bold text-white mb-2">SEO Optimized Growth</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                We don't just build websites; we rank them. Our SEO-first approach ensures your business gets the visibility it deserves.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <div
-                    class="card group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/10 hover:border-brand-accent/30 transition-all duration-500 overflow-hidden shadow-2xl w-full tb:w-[calc(50%-2rem)] md:w-[calc(33.33%-2rem)] max-w-[450px]">
-                    <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
-                    <div class="relative h-56 w-full mb-6 flex items-center justify-center">
-                        <div
-                            class="relative w-40 h-32 bg-gradient-to-br from-brand-secondary/20 to-brand-primary/20 border border-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md group-hover:rotate-3 transition-transform duration-500 shadow-inner">
-                            <div class="flex items-center gap-1">
-                                <i class="fas fa-shield-alt text-brand-accent text-2xl animate-pulse"></i>
-                            </div>
-                            <div
-                                class="absolute -top-4 -right-4 w-10 h-10 bg-brand-dark/80 backdrop-blur-md border border-white/10 rounded-xl flex items-center justify-center shadow-lg transform rotate-12">
-                                <i class="fas fa-check-double text-brand-accent text-xs"></i>
-                            </div>
-                            <div
-                                class="absolute -bottom-4 -right-4 w-10 h-10 bg-brand-dark/80 backdrop-blur-md border border-white/10 rounded-xl flex items-center justify-center shadow-lg transform -rotate-6 z-20">
-                                <i class="fas fa-headset text-white text-xs"></i>
+                <div class="swiper-slide h-auto w-[85%] max-w-[350px]">
+                    <div class="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/10 hover:border-brand-accent/30 transition-all duration-500 overflow-hidden shadow-2xl h-full">
+                        <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
+                        <div class="relative h-56 w-full mb-6 flex items-center justify-center">
+                            <div class="relative w-40 h-32 bg-gradient-to-br from-brand-secondary/20 to-brand-primary/20 border border-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md group-hover:rotate-3 transition-transform duration-500 shadow-inner">
+                                <div class="flex items-center gap-1">
+                                    <i class="fas fa-shield-alt text-brand-accent text-2xl animate-pulse"></i>
+                                </div>
+                                <div class="absolute -top-4 -right-4 w-10 h-10 bg-brand-dark/80 backdrop-blur-md border border-white/10 rounded-xl flex items-center justify-center shadow-lg transform rotate-12">
+                                    <i class="fas fa-check-double text-brand-accent text-xs"></i>
+                                </div>
+                                <div class="absolute -bottom-4 -right-4 w-10 h-10 bg-brand-dark/80 backdrop-blur-md border border-white/10 rounded-xl flex items-center justify-center shadow-lg transform -rotate-6 z-20">
+                                    <i class="fas fa-headset text-white text-xs"></i>
+                                </div>
                             </div>
                         </div>
+                        <div class="relative z-10 text-center">
+                            <h3 class="text-xl font-bold text-white mb-2">Dedicated Partnership</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Beyond delivery, we provide ongoing support and scalable custom solutions to keep your business ahead of the curve.
+                            </p>
+                        </div>
                     </div>
-                    <div class="relative z-10 text-center">
-                        <h3 class="text-xl font-bold text-white mb-2">Dedicated Partnership</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            Beyond delivery, we provide ongoing support and scalable custom solutions to keep your
-                            business ahead of the curve.
-                        </p>
+                </div>
+
+                <div class="swiper-slide h-auto w-[85%] max-w-[350px]">
+                    <div class="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/10 hover:border-brand-accent/30 transition-all duration-500 overflow-hidden shadow-2xl h-full">
+                        <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
+                        <div class="relative h-56 w-full mb-6 flex items-center justify-center">
+                            <div class="relative w-36 h-36 rounded-full border border-white/10 flex items-center justify-center bg-brand-dark/30 backdrop-blur-sm">
+                                <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
+                                    <circle cx="50" cy="50" r="40" fill="transparent" stroke="rgba(255,255,255,0.05)" stroke-width="10"></circle>
+                                    <circle cx="50" cy="50" r="40" fill="transparent" stroke="#2C666E" stroke-width="10" stroke-dasharray="200" stroke-dashoffset="100"></circle>
+                                    <circle cx="50" cy="50" r="40" fill="transparent" stroke="#90DDF0" stroke-width="10" stroke-dasharray="200" stroke-dashoffset="160"></circle>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center flex-col">
+                                    <span class="text-2xl font-bold text-white">3X</span>
+                                    <span class="text-[10px] text-gray-400 uppercase tracking-widest">ROI</span>
+                                </div>
+                                <div class="absolute top-0 right-0 w-8 h-8 bg-brand-accent rounded-full flex items-center justify-center border border-white/20 shadow-lg animate-pulse">
+                                    <i class="fas fa-chart-line text-brand-dark text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative z-10 text-center">
+                            <h3 class="text-xl font-bold text-white mb-2">Data-Driven Results</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                We utilize advanced analytics and user behavior data to craft strategies that maximize your Return on Investment.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide h-auto w-[85%] max-w-[350px]">
+                    <div class="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/10 hover:border-brand-accent/30 transition-all duration-500 overflow-hidden shadow-2xl h-full">
+                        <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
+                        <div class="relative h-56 w-full mb-6 flex items-center justify-center">
+                            <div class="relative w-28 h-48 border-2 border-white/20 rounded-[2rem] bg-brand-dark flex flex-col items-center justify-between p-2 shadow-2xl transform group-hover:-translate-y-2 transition-transform">
+                                <div class="w-8 h-1 bg-white/20 rounded-full mt-2"></div>
+                                <div class="w-full h-32 bg-white/5 rounded-lg border border-white/5 overflow-hidden relative">
+                                    <div class="absolute top-2 left-2 w-12 h-2 bg-brand-accent/50 rounded-full"></div>
+                                    <div class="absolute top-6 left-2 w-8 h-8 bg-white/10 rounded-md"></div>
+                                    <div class="absolute top-6 left-12 right-2 h-2 bg-white/10 rounded-full"></div>
+                                    <div class="absolute top-10 left-12 right-6 h-2 bg-white/10 rounded-full"></div>
+                                </div>
+                                <div class="w-3 h-3 border border-white/20 rounded-full mb-1"></div>
+                                <div class="absolute -right-6 top-10 w-10 h-10 bg-brand-primary/80 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/10 shadow-lg">
+                                    <i class="fas fa-mobile-alt text-white text-sm"></i>
+                                </div>
+                                <div class="absolute -left-4 bottom-12 w-8 h-8 bg-brand-accent/80 backdrop-blur-md rounded-full flex items-center justify-center border border-white/10 shadow-lg">
+                                    <i class="fas fa-bolt text-brand-dark text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative z-10 text-center">
+                            <h3 class="text-xl font-bold text-white mb-2">Mobile-First Design</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Capturing the massive mobile audience with responsive, thumb-friendly designs that convert visitors on any device.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
+    </div>
+    
     </section>
 
     <!-- Our projects -->
     <section class="w-full bg-brand-dark py-20 px-4 md:px-8 relative overflow-hidden">
-        <div
-            class="absolute top-0 right-1/4 w-[600px] h-[600px] bg-brand-primary/20 rounded-full blur-[120px] pointer-events-none">
-        </div>
-        <div
-            class="absolute bottom-0 left-2/4 w-[500px] h-[500px] bg-brand-primary/15 rounded-full blur-[120px] pointer-events-none">
+    <div class="absolute top-0 right-1/4 w-[600px] h-[600px] bg-brand-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-0 left-2/4 w-[500px] h-[500px] bg-brand-primary/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+        <div class="mb-14 text-center section-header">
+            <div class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6 backdrop-blur-md">
+                <div class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></div>
+                <span class="text-brand-accent text-xs font-bold uppercase tracking-wider">Our Portfolio</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight max-w-3xl mx-auto mb-10">
+                <span>Recent work that speaks</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-secondary">louder than words.</span>
+            </h2>
+
+            <div class="inline-flex p-1 bg-brand-accent/10 border border-brand-accent/10  rounded-2xl backdrop-blur-xl">
+                <button onclick="filterProjects('shopify', this)" class="tab-btn bg-brand-accent/20 px-4 md:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 text-brand-light hover:text-white">Shopify</button>
+                <button onclick="filterProjects('cms', this)" class="tab-btn px-4 md:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 text-brand-light/60 hover:text-brand-light">CMS</button>
+                <button onclick="filterProjects('web', this)" class="tab-btn px-4 md:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 text-brand-light/60 hover:text-brand-light">Web Apps</button>
+                <button onclick="filterProjects('design', this)" class="tab-btn px-4 md:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 text-brand-light/60 hover:text-brand-light">UI/UX Design</button>
+            </div>
         </div>
 
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-                <div class="relative">
-                    <span class="text-brand-accent text-xs font-bold uppercase tracking-wider pl-1">See Our
-                        Portfolio</span>
-                    <h2 class="text-5xl md:text-7xl font-medium text-white leading-tight mt-2">
-                        <span>Awesome </span><br class="hidden md:block">
-                        <span class="inline-flex items-center gap-4">
-                            <span
-                                class="bg-brand-accent relative inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 border border-white/20 rounded-full animate-spin-slow">
-                                <span class="absolute inset-0 rounded-full border border-white/20 rotate-45"></span>
-                                <span
-                                    class="absolute inset-0 rounded-full border border-2 border-white -rotate-45"></span>
-                            </span>
-                            works
-                        </span>
-                    </h2>
+        <div class="swiper projectsSwiper overflow-visible">
+
+            <div id="projects-container" class="swiper-wrapper md:grid md:grid-cols-3 md:gap-8 md:w-full mb-6" >
+
+                <div class="swiper-slide project-item h-auto" data-category="shopify">
+                    <a href="#" class="group flex flex-col gap-3">
+                        <div class="relative bg-brand-accent/5 rounded-[2.5rem] p-4 border border-white/5 hover:border-brand-accent/30 transition-all duration-500 h-[450px]">
+                            <div class="w-full h-full bg-brand-dark/50 rounded-[2rem] relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" alt="Shopify Project">
+                                <div class="absolute inset-0 bg-brand-dark/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                    <div class="w-16 h-16 rounded-full bg-brand-accent flex items-center justify-center mb-4 transform scale-50 group-hover:scale-100 transition-transform duration-500">
+                                        <i class="fa-regular fa-eye text-brand-dark text-xl font-bold"></i>
+                                    </div>
+                                    <span class="text-white font-bold tracking-widest text-sm uppercase">View Project</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-6 py-6 rounded-[2rem] bg-white/5 border border-white/10 group-hover:bg-brand-accent/10 transition-colors duration-500 flex justify-between items-center">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-1">Betely Agency</h3>
+                                <p class="text-xs text-white/50 uppercase tracking-widest">Shopify Store</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark transition-all duration-500">
+                                <i class="fas fa-arrow-right -rotate-45 group-hover:rotate-0"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-slide project-item h-auto" data-category="shopify">
+                    <a href="#" class="group flex flex-col gap-3">
+                        <div class="relative bg-brand-accent/5 rounded-[2.5rem] p-4 border border-white/5 hover:border-brand-accent/30 transition-all duration-500 h-[450px]">
+                            <div class="w-full h-full bg-brand-dark/50 rounded-[2rem] relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" alt="Shopify Project">
+                                <div class="absolute inset-0 bg-brand-dark/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                    <div class="w-16 h-16 rounded-full bg-brand-accent flex items-center justify-center mb-4 transform scale-50 group-hover:scale-100 transition-transform duration-500">
+                                        <i class="fa-regular fa-eye text-brand-dark text-xl font-bold"></i>
+                                    </div>
+                                    <span class="text-white font-bold tracking-widest text-sm uppercase">View Project</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-6 py-6 rounded-[2rem] bg-white/5 border border-white/10 group-hover:bg-brand-accent/10 transition-colors duration-500 flex justify-between items-center">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-1">Betely Agency</h3>
+                                <p class="text-xs text-white/50 uppercase tracking-widest">Shopify Store</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark transition-all duration-500">
+                                <i class="fas fa-arrow-right -rotate-45 group-hover:rotate-0"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-slide project-item h-auto" data-category="shopify">
+                    <a href="#" class="group flex flex-col gap-3">
+                        <div class="relative bg-brand-accent/5 rounded-[2.5rem] p-4 border border-white/5 hover:border-brand-accent/30 transition-all duration-500 h-[450px]">
+                            <div class="w-full h-full bg-brand-dark/50 rounded-[2rem] relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" alt="Shopify Project">
+                                <div class="absolute inset-0 bg-brand-dark/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                    <div class="w-16 h-16 rounded-full bg-brand-accent flex items-center justify-center mb-4 transform scale-50 group-hover:scale-100 transition-transform duration-500">
+                                        <i class="fa-regular fa-eye text-brand-dark text-xl font-bold"></i>
+                                    </div>
+                                    <span class="text-white font-bold tracking-widest text-sm uppercase">View Project</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-6 py-6 rounded-[2rem] bg-white/5 border border-white/10 group-hover:bg-brand-accent/10 transition-colors duration-500 flex justify-between items-center">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-1">Betely Agency</h3>
+                                <p class="text-xs text-white/50 uppercase tracking-widest">Shopify Store</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark transition-all duration-500">
+                                <i class="fas fa-arrow-right -rotate-45 group-hover:rotate-0"></i>
+                            </div>
+                        </div>
+                    </a>
                 </div>
 
-                <div class="group">
-                    <a href="#"
-                        class="relative inline-flex items-center justify-center gap-3 py-4 px-8 bg-brand-accent/10 hover:bg-brand-accent text-brand-light hover:text-brand-dark rounded-full border border-brand-accent/30 transition-all duration-500 overflow-hidden">
-                        <span class="font-bold uppercase tracking-widest text-xs relative z-10">Explore More</span>
-                        <i
-                            class="fas fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-500 relative z-10"></i>
-                        <div
-                            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000">
+                <div class="swiper-slide project-item hidden h-auto" data-category="web">
+                    <a href="#" class="group flex flex-col gap-3">
+                        <div class="relative bg-brand-accent/5 rounded-[2.5rem] p-4 border border-white/5 hover:border-brand-accent/30 transition-all duration-500 h-[450px]">
+                            <div class="w-full h-full bg-brand-dark/50 rounded-[2rem] relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" alt="Shopify Project">
+                                <div class="absolute inset-0 bg-brand-dark/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                    <div class="w-16 h-16 rounded-full bg-brand-accent flex items-center justify-center mb-4 transform scale-50 group-hover:scale-100 transition-transform duration-500">
+                                        <i class="fa-regular fa-eye text-brand-dark text-xl font-bold"></i>
+                                    </div>
+                                    <span class="text-white font-bold tracking-widest text-sm uppercase">View Project</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-6 py-6 rounded-[2rem] bg-white/5 border border-white/10 group-hover:bg-brand-accent/10 transition-colors duration-500 flex justify-between items-center">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-1">WEB Agency</h3>
+                                <p class="text-xs text-white/50 uppercase tracking-widest">Shopify Store</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark transition-all duration-500">
+                                <i class="fas fa-arrow-right -rotate-45 group-hover:rotate-0"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-slide project-item hidden h-auto" data-category="web">
+                    <a href="#" class="group flex flex-col gap-3">
+                        <div class="relative bg-brand-accent/5 rounded-[2.5rem] p-4 border border-white/5 hover:border-brand-accent/30 transition-all duration-500 h-[450px]">
+                            <div class="w-full h-full bg-brand-dark/50 rounded-[2rem] relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" alt="Shopify Project">
+                                <div class="absolute inset-0 bg-brand-dark/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                    <div class="w-16 h-16 rounded-full bg-brand-accent flex items-center justify-center mb-4 transform scale-50 group-hover:scale-100 transition-transform duration-500">
+                                        <i class="fa-regular fa-eye text-brand-dark text-xl font-bold"></i>
+                                    </div>
+                                    <span class="text-white font-bold tracking-widest text-sm uppercase">View Project</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-6 py-6 rounded-[2rem] bg-white/5 border border-white/10 group-hover:bg-brand-accent/10 transition-colors duration-500 flex justify-between items-center">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-1">WEB Agency</h3>
+                                <p class="text-xs text-white/50 uppercase tracking-widest">Shopify Store</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark transition-all duration-500">
+                                <i class="fas fa-arrow-right -rotate-45 group-hover:rotate-0"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-slide project-item hidden h-auto" data-category="web">
+                    <a href="#" class="group flex flex-col gap-3">
+                        <div class="relative bg-brand-accent/5 rounded-[2.5rem] p-4 border border-white/5 hover:border-brand-accent/30 transition-all duration-500 h-[450px]">
+                            <div class="w-full h-full bg-brand-dark/50 rounded-[2rem] relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" alt="Shopify Project">
+                                <div class="absolute inset-0 bg-brand-dark/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                    <div class="w-16 h-16 rounded-full bg-brand-accent flex items-center justify-center mb-4 transform scale-50 group-hover:scale-100 transition-transform duration-500">
+                                        <i class="fa-regular fa-eye text-brand-dark text-xl font-bold"></i>
+                                    </div>
+                                    <span class="text-white font-bold tracking-widest text-sm uppercase">View Project</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-6 py-6 rounded-[2rem] bg-white/5 border border-white/10 group-hover:bg-brand-accent/10 transition-colors duration-500 flex justify-between items-center">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-1">WEB Agency</h3>
+                                <p class="text-xs text-white/50 uppercase tracking-widest">Shopify Store</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark transition-all duration-500">
+                                <i class="fas fa-arrow-right -rotate-45 group-hover:rotate-0"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="swiper-slide project-item hidden h-auto" data-category="cms">
+                    <a href="#" class="group flex flex-col gap-3">
+                        <div class="relative bg-brand-accent/5 rounded-[2.5rem] p-4 border border-white/5 hover:border-brand-accent/30 transition-all duration-500 h-[450px]">
+                            <div class="w-full h-full bg-brand-dark/50 rounded-[2rem] relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" alt="Shopify Project">
+                                <div class="absolute inset-0 bg-brand-dark/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                    <div class="w-16 h-16 rounded-full bg-brand-accent flex items-center justify-center mb-4 transform scale-50 group-hover:scale-100 transition-transform duration-500">
+                                        <i class="fa-regular fa-eye text-brand-dark text-xl font-bold"></i>
+                                    </div>
+                                    <span class="text-white font-bold tracking-widest text-sm uppercase">View Project</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-6 py-6 rounded-[2rem] bg-white/5 border border-white/10 group-hover:bg-brand-accent/10 transition-colors duration-500 flex justify-between items-center">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-1">CMS Agency</h3>
+                                <p class="text-xs text-white/50 uppercase tracking-widest">Shopify Store</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark transition-all duration-500">
+                                <i class="fas fa-arrow-right -rotate-45 group-hover:rotate-0"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-slide project-item hidden h-auto" data-category="cms">
+                    <a href="#" class="group flex flex-col gap-3">
+                        <div class="relative bg-brand-accent/5 rounded-[2.5rem] p-4 border border-white/5 hover:border-brand-accent/30 transition-all duration-500 h-[450px]">
+                            <div class="w-full h-full bg-brand-dark/50 rounded-[2rem] relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" alt="Shopify Project">
+                                <div class="absolute inset-0 bg-brand-dark/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                    <div class="w-16 h-16 rounded-full bg-brand-accent flex items-center justify-center mb-4 transform scale-50 group-hover:scale-100 transition-transform duration-500">
+                                        <i class="fa-regular fa-eye text-brand-dark text-xl font-bold"></i>
+                                    </div>
+                                    <span class="text-white font-bold tracking-widest text-sm uppercase">View Project</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-6 py-6 rounded-[2rem] bg-white/5 border border-white/10 group-hover:bg-brand-accent/10 transition-colors duration-500 flex justify-between items-center">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-1">CMS Agency</h3>
+                                <p class="text-xs text-white/50 uppercase tracking-widest">Shopify Store</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark transition-all duration-500">
+                                <i class="fas fa-arrow-right -rotate-45 group-hover:rotate-0"></i>
+                            </div>
                         </div>
                     </a>
                 </div>
             </div>
 
-            <div class="swiper projectsSwiper overflow-visible">
-                <div class="swiper-wrapper md:grid md:grid-cols-3 md:gap-8 md:w-full">
-
-                    <div class="swiper-slide h-auto">
-                        <a href="#" class="group flex flex-col gap-3">
-                            <div
-                                class="relative bg-brand-accent/5 rounded-[2.5rem] p-4 overflow-hidden h-[450px] border border-white/5 hover:border-brand-accent/30 transition-all duration-500">
-                                <div
-                                    class="w-full h-full bg-brand-dark/50 rounded-[2rem] relative overflow-hidden group-hover:scale-[0.98] transition-transform duration-500">
-                                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80"
-                                        class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
-                                        alt="AI Art">
-                                    <div
-                                        class="absolute inset-0 bg-brand-dark/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-                                        <div
-                                            class="w-16 h-16 rounded-full bg-brand-accent flex items-center justify-center mb-4 transform scale-50 group-hover:scale-100 transition-transform duration-500">
-                                            <i class="fa-regular fa-eye text-brand-light text-xl"></i>
-                                        </div>
-                                        <span class="text-white font-bold tracking-widest text-sm uppercase">View
-                                            Project</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="px-6 py-6 rounded-[2rem] bg-white/5 backdrop-blur-md flex justify-between items-center border border-white/10 group-hover:bg-brand-accent/10 transition-colors duration-500">
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white mb-1">Betely Agency</h3>
-                                    <p class="text-xs text-white/50 uppercase tracking-widest">UI/UX Website Design</p>
-                                </div>
-                                <div
-                                    class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark group-hover:border-brand-accent transition-all duration-500">
-                                    <i
-                                        class="fas fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide h-auto">
-                        <a href="#" class="group flex flex-col gap-3">
-                            <div
-                                class="relative bg-brand-accent/5 rounded-[2.5rem] p-4 overflow-hidden h-[450px] border border-white/5 hover:border-brand-accent/30 transition-all duration-500">
-                                <div
-                                    class="w-full h-full bg-brand-dark/50 rounded-[2rem] relative overflow-hidden group-hover:scale-[0.98] transition-transform duration-500">
-                                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80"
-                                        class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
-                                        alt="AI Art">
-                                    <div
-                                        class="absolute inset-0 bg-brand-dark/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-                                        <div
-                                            class="w-16 h-16 rounded-full bg-brand-accent flex items-center justify-center mb-4 transform scale-50 group-hover:scale-100 transition-transform duration-500">
-                                            <i class="fa-regular fa-eye text-brand-light text-xl"></i>
-                                        </div>
-                                        <span class="text-white font-bold tracking-widest text-sm uppercase">View
-                                            Project</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="px-6 py-6 rounded-[2rem] bg-white/5 backdrop-blur-md flex justify-between items-center border border-white/10 group-hover:bg-brand-accent/10 transition-colors duration-500">
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white mb-1">Betely Agency</h3>
-                                    <p class="text-xs text-white/50 uppercase tracking-widest">UI/UX Website Design</p>
-                                </div>
-                                <div
-                                    class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark group-hover:border-brand-accent transition-all duration-500">
-                                    <i class="fas fa-arrow-right -rotate-45"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide h-auto">
-                        <a href="#" class="group flex flex-col gap-3">
-                            <div
-                                class="relative bg-brand-accent/5 rounded-[2.5rem] p-4 overflow-hidden h-[450px] border border-white/5 hover:border-brand-accent/30 transition-all duration-500">
-                                <div
-                                    class="w-full h-full bg-brand-dark/50 rounded-[2rem] relative overflow-hidden group-hover:scale-[0.98] transition-transform duration-500">
-                                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80"
-                                        class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
-                                        alt="AI Art">
-                                    <div
-                                        class="absolute inset-0 bg-brand-dark/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-                                        <div
-                                            class="w-16 h-16 rounded-full bg-brand-accent flex items-center justify-center mb-4 transform scale-50 group-hover:scale-100 transition-transform duration-500">
-                                            <i class="fa-regular fa-eye text-brand-light text-xl"></i>
-                                        </div>
-                                        <span class="text-white font-bold tracking-widest text-sm uppercase">View
-                                            Project</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="px-6 py-6 rounded-[2rem] bg-white/5 backdrop-blur-md flex justify-between items-center border border-white/10 group-hover:bg-brand-accent/10 transition-colors duration-500">
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white mb-1">Betely Agency</h3>
-                                    <p class="text-xs text-white/50 uppercase tracking-widest">UI/UX Website Design</p>
-                                </div>
-                                <div
-                                    class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-brand-accent group-hover:text-brand-dark group-hover:border-brand-accent transition-all duration-500">
-                                    <i class="fas fa-arrow-right -rotate-45"></i>
-                                </div>
-                            </div>
-                        </a>
+            <div class="flex justify-center items-center mt-12 md:hidden">
+                <div class="relative w-20 h-20 flex items-center justify-center">
+                    <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" stroke="grey" stroke-width="2" fill="none" />
+                        <circle id="progress-circle" cx="50" cy="50" r="45" stroke="#60a5fa" stroke-width="4" fill="none"
+                            stroke-dasharray="283" stroke-dashoffset="283" stroke-linecap="round"
+                            class="transition-all duration-300" />
+                    </svg>
+                    <div class="absolute text-white font-bold text-sm">
+                        <span id="current-index">01</span><span class="text-white/30">/</span><span id="total-slides"
+                            class="text-white/30 text-xs">03</span>
                     </div>
                 </div>
             </div>
         </div>
+
+    </div>
     </section>
 
     <!-- Creative Powerhouse -->
@@ -828,7 +1177,7 @@
 
     <div class="feedback-container flex flex-col gap-10">
         
-        <div class="scroll-row-1 flex gap-6 whitespace-nowrap px-4" style="width: max-content;">
+        <div class="scroll-row-1 flex gap-5 whitespace-nowrap px-4" style="width: max-content;">
             <div class="w-[350px] md:w-[450px] bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.2rem] p-8 hover:bg-white/10 transition-all group shadow-xl">
                 <p class="text-gray-300 text-sm leading-relaxed mb-8 whitespace-normal">"Their team are easy to work with and helped me make amazing website in a short amount of time."</p>
                 <div class="flex items-center justify-between pt-4 border-t border-white/5">
@@ -901,7 +1250,7 @@
             </div>
         </div>
 
-        <div class="scroll-row-2 flex gap-6 whitespace-nowrap px-4 self-end" style="width: max-content;">
+        <div class="scroll-row-2 flex gap-4 whitespace-nowrap px-4 self-end" style="width: max-content;">
             <div class="w-[350px] md:w-[450px] bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.2rem] p-8 hover:bg-white/10 transition-all group shadow-xl">
                 <p class="text-gray-300 text-sm leading-relaxed mb-8 whitespace-normal">"Reliable and creative. The virtual assistant services have been a game changer for us."</p>
                 <div class="flex items-center justify-between pt-4 border-t border-white/5">
@@ -977,7 +1326,7 @@
     </section>
 
     <!-- Pricing -->
-   <section class="w-full bg-brand-dark pt-20 px-4 md:px-8 relative overflow-hidden">
+    <section class="w-full bg-brand-dark pt-20 px-4 md:px-8 relative overflow-hidden">
     <div class="absolute top-[10%] left-1/4 w-[700px] h-[500px] bg-brand-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
     
     <div class="text-center max-w-3xl mx-auto mb-14">
@@ -1085,10 +1434,10 @@
             <span class="text-white/50 text-[10px] uppercase tracking-widest mt-1">Slide to Pick Your Plan</span>
         </div>
     </div>
-</section>
+    </section>
 
     <!-- FAQs -->
-    <section class="w-full bg-brand-dark pt-20 pb-20 px-4 md:px-8 relative overflow-hidden">
+    <section class="w-full bg-brand-dark pt-20 pb-20 px-3 md:px-8 relative overflow-hidden">
 
         <div
             class="absolute bottom-[10%] right-1/4 w-[600px] h-[400px] bg-brand-primary/20 rounded-full blur-[130px] pointer-events-none">
@@ -1266,58 +1615,54 @@
                 </div>
 
                 <div class="relative">
-                    <div
-                        class="absolute -inset-1 bg-gradient-to-r from-brand-accent to-purple-600 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200">
-                    </div>
 
                     <div
-                        class="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[1rem] p-5 md:p-8 shadow-xl">
-
-                        <h3 class="text-xl font-bold text-white mb-8">Schedule a Free Consultation</h3>
+                        class="relative  backdrop-blur-xl rounded-[1rem] p-5 md:p-8 shadow-xl">
+                        <div class="absolute bottom-[10%] right-1/4 w-[600px] h-[400px] bg-brand-primary/20 rounded-full blur-[130px] pointer-events-none"></div>
 
                         <form class="space-y-3 w-54">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label
-                                        class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Full
+                                        class="block text-xs font-bold text-brand-light uppercase tracking-wider mb-2" for="name">Full
                                         Name</label>
-                                    <input type="text" placeholder="John Doe"
-                                        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent/50 focus:bg-white/10 transition-all">
+                                    <input name="name" id="name" type="text" placeholder="John Doe"
+                                        class="w-full bg-transparent border border-brand-accent/40 rounded-xl px-4 py-3 text-brand-accent placeholder-brand-light/50 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-accent/5 transition-all">
                                 </div>
 
                                 <div>
-                                    <label
-                                        class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Phone</label>
-                                    <input type="tel" placeholder="+1 (555) 000-0000"
-                                        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent/50 focus:bg-white/10 transition-all">
+                                    <label for="number"
+                                        class="block text-xs font-bold text-brand-light uppercase tracking-wider mb-2">Phone</label>
+                                    <input name="number" id="number" type="tel" placeholder="+1 (555) 000-0000"
+                                        class="w-full bg-transparent border border-brand-accent/40 rounded-xl px-4 py-3 text-brand-accent placeholder-brand-light/50 focus:outline-none focus:border-brand-accent/50 focus:bg-brand-accent/5 transition-all">
                                 </div>
 
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label
-                                        class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">How
+                                    <label for="service"
+                                        class="block text-xs font-bold text-brand-light uppercase tracking-wider mb-2">How
                                         Can We Help?</label>
                                     <div class="relative">
-                                        <select
-                                            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white appearance-none focus:outline-none focus:border-brand-accent/50 cursor-pointer">
+                                        <select name="service" id="service"
+                                            class="w-full bg-transparent border border-brand-accent/40 rounded-xl px-4 py-3 text-brand-accent appearance-none focus:outline-none focus:border-brand-accent/50 cursor-pointer">
                                             <option class="bg-brand-accent text-white">Select Option</option>
                                             <option class="bg-brand-accent">Web Design</option>
                                             <option class="bg-brand-accent">Branding</option>
                                             <option class="bg-brand-accent">Marketing</option>
                                         </select>
                                         <i
-                                            class="fas fa-chevron-down absolute right-5 top-1/2 -translate-y-1/2 text-brand-light/80 pointer-events-none"></i>
+                                            class="fas fa-chevron-down absolute right-5 top-1/2 -translate-y-1/2 text-brand-light pointer-events-none"></i>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label
-                                        class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Budget</label>
+                                    <label for="budget"
+                                        class="block text-xs font-bold text-brand-light uppercase tracking-wider mb-2">Budget</label>
                                     <div class="relative">
-                                        <select
-                                            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white appearance-none focus:outline-none focus:border-brand-accent/50 cursor-pointer">
+                                        <select name="budget" id="budget"
+                                            class="w-full bg-transparent border border-brand-accent/40 rounded-xl px-4 py-3 text-brand-accent appearance-none focus:outline-none focus:border-brand-accent/50 cursor-pointer">
                                             <option class="bg-brand-accent text-white">Select Range</option>
                                             <option class="bg-brand-accent">$1k - $5k</option>
                                             <option class="bg-brand-accent">$5k - $10k</option>
@@ -1330,16 +1675,25 @@
                             </div>
 
                             <div>
-                                <label
-                                    class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Description</label>
-                                <textarea rows="3" placeholder="Tell us about your project..."
-                                    class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-accent/50 focus:bg-white/10 transition-all resize-none"></textarea>
+                                <label for="desc"
+                                    class="block text-xs font-bold text-light uppercase tracking-wider mb-2">Description</label>
+                                <textarea name="desc" id="desc" rows="3" placeholder="Tell us about your project..."
+                                    class="w-full bg-transparent border border-brand-accent/40 rounded-xl px-4 py-3 text-brand-accent placeholder-brand-light/50 focus:outline-none focus:border-brand-accent/50 ffocus:bg-brand-accent/5 transition-all resize-none"></textarea>
                             </div>
 
-                            <button type="button"
-                                class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-secondary to-brand-primary text-white font-bold tracking-wide  hover:scale-[1.01] transition-all duration-300">
-                                Get In Touch
-                            </button>
+                            <div class="group">
+                                <button
+                                class="relative w-full inline-flex items-center justify-center gap-3 py-4 px-8 bg-transparent text-brand-light hover:text-brand-accent rounded-xl border border-brand-accent/30 transition-all duration-500 overflow-hidden">
+                                <span class="font-bold uppercase tracking-widest text-xs relative z-10">
+                                    Let's Connect
+                                </span>
+                                <i
+                                    class="fas fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-500 relative z-10"></i>
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-r from-transparent via-brand-accent/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000">
+                                </div>
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -1354,58 +1708,54 @@
         <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-[500px] bg-brand-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
         <div class="absolute top-[20%] right-[5%] w-[400px] h-[400px] bg-brand-secondary/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-        <div class="max-w-[99%] mx-auto relative z-10 animate-float">
+        <div class="relative max-w-[99%] mx-auto z-10 animate-float">
 
-            <div id="social-div" class="absolute top-0 right-0 z-20  flex flex-col items-end group">
+            <div id="social-div" class="rotate-90 sm:rotate-0 absolute sm:top-0 top-[12%] sm:right-0 -right-[18%] z-20  flex flex-col items-end group">
                 <div
-                    class="bg-white text-brand-dark px-2 py-2 rounded-full rounded-br-none flex gap-2 shadow-[0_0_10px_rgba(255,255,255,0.3)] duration-300">
+                    class=" px-2 py-2  rounded-full flex gap-2 duration-300">
                     <a href="#"
-                        class="w-10 h-10 rounded-full bg-brand-accent text-brand-light flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark hover:rotate-12 transition-all duration-300">
-                        <i class="fas fa-globe"></i>
+                        class="w-10 h-10 rounded-full bg-brand-light text-brand-accent flex items-center justify-center hover:bg-brand-accent/10 backdrop-blur-lg hover:text-brand-accent hover:rotate-12 transition-all duration-300">
+                        <i class=" -rotate-90 sm:rotate-0 fas fa-globe"></i>
                     </a>
                     <a href="#"
-                        class="w-10 h-10 rounded-full bg-brand-accent text-brand-light flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark hover:-rotate-12 transition-all duration-300">
-                        <i class="fab fa-facebook-f"></i>
+                        class="w-10 h-10 rounded-full bg-brand-light text-brand-accent flex items-center justify-center hover:bg-brand-accent/10 backdrop-blur-lg hover:text-brand-accent hover:-rotate-12 transition-all duration-300">
+                        <i class=" -rotate-90 sm:rotate-0 fab fa-facebook-f"></i>
                     </a>
                     <a href="#"
-                        class="w-10 h-10 rounded-full bg-brand-accent text-brand-light flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark hover:rotate-12 transition-all duration-300">
-                        <i class="fab fa-twitter"></i>
+                        class="w-10 h-10 rounded-full bg-brand-light text-brand-accent flex items-center justify-center hover:bg-brand-accent/10 backdrop-blur-lg hover:text-brand-accent hover:rotate-12 transition-all duration-300">
+                        <i class=" -rotate-90 sm:rotate-0 fab fa-twitter"></i>
                     </a>
                     <a href="#"
-                        class="w-10 h-10 rounded-full bg-brand-accent text-brand-light flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark hover:-rotate-12 transition-all duration-300">
-                        <i class="fab fa-instagram"></i>
+                        class="w-10 h-10 rounded-full bg-brand-light text-brand-accent flex items-center justify-center hover:bg-brand-accent/10 backdrop-blur-lg hover:text-brand-accent hover:-rotate-12 transition-all duration-300">
+                        <i class=" -rotate-90 sm:rotate-0 fab fa-instagram"></i>
                     </a>
-                </div>
-                <div
-                    class="w-8 h-8 -mt-4 mr-6 bg-transparent rounded-tr-full shadow-[10px_-10px_0_0_rgba(255,255,255,0.05)] pointer-events-none hidden md:block">
                 </div>
             </div>
 
             <div
-                class="glass-shine bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2rem]  p-8 md:p-12 relative shadow-2xl overflow-hidden transition-colors duration-500">
+                class="glass-shine bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 md:p-12 relative shadow-2xl overflow-hidden transition-colors duration-500">
 
                 <div class="absolute inset-0 bg-grid opacity-10 pointer-events-none"></div>
 
-                <div class="relative z-10 mb-10">
+                <div class="relative z-10 mb-8">
                     <p class="text-gray-400 text-base md:text-lg mb-2 font-medium flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-brand-accent"></span>
                         Got a project? Need an Unfair Advantage?
                     </p>
-                    <h1 class="text-4xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter leading-none">
-                        <span>Crafting</span>
-                        <span class="text-transparent bg-clip-text shine-text animate-gradient-text opacity-90">Since
-                            2026</span>
+                    <h1 class="flex items-center text-4xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter leading-none">
+                        <img src="logo-white.png" alt="logo-white" class="w-12 md:w-24 md:h-24 h-12">
+                        <span>HEX</span><span class="text-transparent bg-clip-text shine-text animate-gradient-text opacity-90">SOLZ</span>
                     </h1>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 relative z-10 border-t border-white/10 pt-10">
 
-                    <div class="lg:col-span-5 flex flex-col justify-between h-full pr-8">
+                    <div class="lg:col-span-5 flex flex-col justify-between h-full md:pr-8">
                         <div>
                             <h4 class="text-white font-bold mb-2">Subscribe newsletter</h4>
                             <p class="text-gray-400 text-sm mb-6">Subscribe to get the latest news and updates!</p>
 
-                            <form class="relative max-w-md group/input">
+                            <form class="relative w-full group/input">
                                 <div
                                     class="absolute inset-y-0 left-4 flex items-center text-brand-light/80 group-focus-within/input:text-brand-accent transition-colors">
                                     <i class="far fa-envelope"></i>
@@ -1422,58 +1772,55 @@
                     </div>
 
                     <div class="lg:col-span-7">
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                        <div class="grid grid-cols-3 md:grid-cols-3 gap-5 md:gap-8">
                             <div>
-                                <h4 class="text-brand-light/80 text-xs font-bold uppercase tracking-wider mb-4">Company
+                                <h4 class="text-brand-light text-xs font-bold uppercase tracking-wider mb-4">Company
                                 </h4>
                                 <ul class="space-y-2 text-sm">
                                     <li><a href="#"
-                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Who
+                                            class="footer-links text-brand-light/60 hover:text-brand-accent hover:translate-x-1 inline-block after:bg-brand-accent transition-all duration-300">Who
                                             we are</a></li>
                                     <li><a href="#"
-                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Our
+                                            class="footer-links text-brand-light/60 hover:text-brand-accent hover:translate-x-1 inline-block after:bg-brand-accent transition-all duration-300">Our
                                             services</a></li>
                                     <li><a href="#"
-                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Our
+                                            class="footer-links text-brand-light/60 hover:text-brand-accent hover:translate-x-1 inline-block after:bg-brand-accent transition-all duration-300">Our
                                             clients</a></li>
                                     <li><a href="#"
-                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Contact
+                                            class="footer-links text-brand-light/60 hover:text-brand-accent hover:translate-x-1 inline-block after:bg-brand-accent transition-all duration-300">Contact
                                             us</a></li>
                                 </ul>
                             </div>
                             <div>
-                                <h4 class="text-brand-light/80 text-xs font-bold uppercase tracking-wider mb-4">Services
+                                <h4 class="text-brand-light text-xs font-bold uppercase tracking-wider mb-4">Services
                                 </h4>
                                 <ul class="space-y-2 text-sm">
                                     <li><a href="#"
-                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Planning</a>
+                                            class="footer-links text-brand-light/60 hover:text-brand-accent hover:translate-x-1 inline-block after:bg-brand-accent transition-all duration-300">Planning</a>
                                     </li>
                                     <li><a href="#"
-                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Research</a>
+                                            class="footer-links text-brand-light/60 hover:text-brand-accent hover:translate-x-1 inline-block after:bg-brand-accent transition-all duration-300">Research</a>
                                     </li>
                                     <li><a href="#"
-                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Consulting</a>
+                                            class="footer-links text-brand-light/60 hover:text-brand-accent hover:translate-x-1 inline-block after:bg-brand-accent transition-all duration-300">Consulting</a>
                                     </li>
                                     <li><a href="#"
-                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Analysis</a>
+                                            class="footer-links text-brand-light/60 hover:text-brand-accent hover:translate-x-1 inline-block after:bg-brand-accent transition-all duration-300">Analysis</a>
                                     </li>
                                 </ul>
                             </div>
                             <div>
-                                <h4 class="text-brand-light/80 text-xs font-bold uppercase tracking-wider mb-4">Customer
+                                <h4 class="text-brand-light text-xs font-bold uppercase tracking-wider mb-4">Customer
                                 </h4>
                                 <ul class="space-y-2 text-sm">
                                     <li><a href="#"
-                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Client
+                                            class="footer-links text-brand-light/60 hover:text-brand-accent hover:translate-x-1 inline-block after:bg-brand-accent transition-all duration-300">Client
                                             support</a></li>
                                     <li><a href="#"
-                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Help
+                                            class="footer-links text-brand-light/60 hover:text-brand-accent hover:translate-x-1 inline-block after:bg-brand-accent transition-all duration-300">Help
                                             center</a></li>
                                     <li><a href="#"
-                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">System
-                                            status</a></li>
-                                    <li><a href="#"
-                                            class="text-white/70 hover:text-white hover:translate-x-1 inline-block transition-all duration-300">Feedback</a>
+                                            class="footer-links text-brand-light/60 hover:text-brand-accent hover:translate-x-1 inline-block after:bg-brand-accent transition-all duration-300">Feedback</a>
                                     </li>
                                 </ul>
                             </div>
@@ -1495,9 +1842,11 @@
     </footer>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="main.js"></script>
 </body>
 
